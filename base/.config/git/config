@@ -1,0 +1,54 @@
+[core]
+    autocrlf = input
+    pager = delta
+    excludeFile = ~/.config/git/ignore
+[user]
+    name = Mikołaj Rosowski
+    email = m.rosowski1@wp.pl
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    ui = true
+[alias]
+    c = commit
+    s = status
+    last = log -1 HEAD
+[help]
+    autocorrect = 1
+[interactive]
+    diffFilter = delta --color-only --features=interactive
+[delta]
+    features = side-by-side line-numbers decorations
+    navigate = true
+    light = false
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
+    hunk-header-decoration-style = cyan box ul
+[diff]
+    algorithm = patience
+    compactionHeuristic = true
+    colorMoved = default
+    submodule = log
+[commit]
+    verbose = true
+[status]
+    submoduleSummary = -1
+[merge]
+    conflictStyle = diff3
+[advice]
+	addIgnoredFile = false
+[init]
+	defaultBranch = main
+[url "git@github.com:"]
+    insteadOf = gh:
+[github]
+    user = rosowskimik
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential

@@ -1,0 +1,24 @@
+#!/bin/zsh
+unalias -a
+alias calias="${EDITOR:-nvim} ${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/aliases && source ${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/aliases"
+
+alias cat=bat
+alias ls="eza --color=auto --group-directories-first -gF"
+alias l="ls -lah"
+alias ip='command ip --color=auto'
+alias ca="cargo"
+alias tma='tmux new-session -t  \; set-option destroy-unattached'
+alias dstow="stow -d ${XDG_DATA_HOME:-${HOME}/.local/share}/dotfiles -t ${HOME}"
+alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
+alias cppcheck="cppcheck --enable=all --inconclusive"
+alias lzg="lazygit"
+alias gdb="gdb-multiarch"
+alias neofetch="flashfetch"
+alias cdtemp='cd `mktemp -d`'
+alias ptemp='pushd `mktemp -d`'
+alias sudo-disp="xhost + local:"
+alias update-mirror="sudo reflector --sort rate --latest 20 --country CZ,DE,PL --fastest 10 --save /etc/pacman.d/mirrorlist --connection-timeout 10 --download-timeout 20"
+alias fetch_latest_arch="wget --passive-ftp -O ~/.local/share/libvirt/images/archlinux-x86_64.iso https://mirror.f4st.host/archlinux/iso/latest/archlinux-x86_64.iso"
+
+alias zenv="source ${ZEPHYR_WEST}/bin/activate"
+
