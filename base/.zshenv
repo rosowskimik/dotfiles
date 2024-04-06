@@ -3,6 +3,9 @@ export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 export XDG_OPT_HOME="${XDG_OPT_HOME:-$HOME/.local/opt}"
 
+# Dotfiles
+export DOTFILES="${XDG_DATA_HOME:-${HOME}/.local/share}/dotfiles"
+
 # Cmake stuff
 export CMAKE_EXPORT_COMPILE_COMMANDS="Yes"
 export CMAKE_GENERATOR="Ninja"
