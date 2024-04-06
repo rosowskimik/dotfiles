@@ -1,0 +1,39 @@
+#!/bin/sh
+
+set -eu
+
+usage() {
+  echo "Usage: $0 (workspace|movetoworkspace)"
+}
+
+current_monitor=$(hyprctl activeworkspace -j | jq -r '.monitor')
+target_monitor=$(hyprctl workspaces -j | jq -r ".[] | select(.id == $2) | .monitor")
+target_monitor_active_ws=$(hyprctl monitors -j | jq -r ".[] | select(.name == \"$target_monitor\") | .activeWorkspace.id")
+
+commands=""
+case ${1-} in
+workspace)
+  if [ $current_monitor != $target_monitor ]; then
+    if [ $target_monitor_active_ws -ne $2 ]; then
+      commands="dispatch moveworkspacetomonitor $2 $current_monitor;"
+    else
+      commands="dispatch swapactiveworkspaces $current_monitor $target_monitor;"
+    fi
+  fi
+  commands="${commands} dispatch workspace $2"
+  ;;
+
+movetoworkspace)
+  if [[ $current_monitor != $target_monitor && $target_monitor_active_ws -ne $2 ]]; then
+    commands="dispatch moveworkspacetomonitor $2 $current_monitor;"
+  fi
+  commands="${commands} dispatch movetoworkspace $2"
+  ;;
+
+*)
+  usage
+  exit 1
+  ;;
+esac
+
+hyprctl --batch "$commands"

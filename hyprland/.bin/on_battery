@@ -1,0 +1,5 @@
+#!/bin/sh
+
+BATTERY=BAT0
+
+test "$(cat /sys/class/power_supply/$BATTERY/status)" = "Discharging"

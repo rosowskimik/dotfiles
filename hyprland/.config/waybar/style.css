@@ -1,0 +1,122 @@
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: "Ubuntu Nerd Font", sans-serif;
+    font-size: 12px;
+    border-radius: 2px;
+}
+
+window#waybar {
+    background-color: #192330;
+    color: #eeeeee;
+    border-bottom: 1px solid shade(#30BEEE, 0.4);
+}
+
+#workspaces {
+    padding-right: 4px;
+}
+
+#workspaces button {
+    border: none;
+    border-radius: 0;
+    border-bottom: 2px solid #30BEEE;
+    padding: 0 2px;
+    color: #ffffff;
+    transition: none;
+}
+
+#workspaces button:hover {
+    background: #29394F;
+}
+
+#workspaces button:first-child {
+    border-radius: 0 0 0 2px;
+}
+
+#workspaces button:last-child {
+    border-radius: 0 0 2px 0;
+}
+
+#workspaces button:first-child:last-child {
+    border-radius: 0 0 2px 2px;
+}
+
+#workspaces button.active {
+    /* background: #29394F; */
+    background: shade(#29394F, 1.35);
+    border-color: shade(#30BEEE, 1.35);
+    box-shadow: inset 0 -1px shade(#30BEEE, 1.35);
+}
+
+#workspaces button.urgent {
+    background-color: #eb4d4b;
+}
+
+#workspaces {
+    margin-right: 4px;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#backlight,
+#pulseaudio,
+#tray {
+    margin-left: 2px;
+    padding: 0 7px;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+}
+
+#clock {
+    border-color: #bbbbbb;
+}
+
+#cpu {
+    border-color: #C94F6D;
+}
+
+#memory {
+    border-color: #9B59B6;
+}
+
+#pulseaudio {
+    border-color: #719CD6;
+}
+
+#backlight{
+    border-color: #F1C40F;
+}
+
+#battery {
+    border-color: #739E41;
+}
+
+#battery.charging, #battery.plugged {
+    border-color: #2DCC32;
+}
+
+#battery.warning:not(.charging) {
+    /* border-color: #F4A261; */
+    border-color: #B25B15;
+}
+
+#battery.critical:not(.charging) {
+    border-color: #B25B15;
+    animation-name: blink;
+    animation-duration: 1s;
+    animation-timing-function: steps(2, start);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#tray {
+    border-color: #4F5366;
+}
+
+@keyframes blink {
+    to {
+        border-color: #ffffff;
+    }
+}
+
