@@ -2,9 +2,14 @@ export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 export XDG_OPT_HOME="${XDG_OPT_HOME:-$HOME/.local/opt}"
+export XDG_SRC_HOME="${XDG_SRC_HOME:-$HOME/.local/src}"
 
 # Dotfiles
-export DOTFILES="${XDG_DATA_HOME:-${HOME}/.local/share}/dotfiles"
+export DOTFILES="$XDG_DATA_HOME/dotfiles"
+
+# Apptainer stuff
+export APPTAINER_CACHEDIR="$XDG_CACHE_HOME/apptainer"
+export APPTAINER_CONTAINERS="$XDG_SRC_HOME/apptainer"
 
 # Cmake stuff
 export CMAKE_EXPORT_COMPILE_COMMANDS="Yes"
