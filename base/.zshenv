@@ -3,6 +3,7 @@ export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 export XDG_OPT_HOME="${XDG_OPT_HOME:-$HOME/.local/opt}"
 export XDG_SRC_HOME="${XDG_SRC_HOME:-$HOME/.local/src}"
+export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 
 # Dotfiles
 export DOTFILES="$XDG_DATA_HOME/dotfiles"

@@ -65,13 +65,18 @@ if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
 fi
 # bindkey -e
 
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+plugins_base=/usr/share
+source /etc/os-release
+if [ "$ID" = "arch" ]; then
+	plugins_base="$plugins_base/zsh/plugins"
+fi
+
+source $plugins_base/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $plugins_base/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 [[ -f "$ZDOTDIR/functions"  ]] && source "$ZDOTDIR/functions"
 [[ -f "$ZDOTDIR/aliases" ]] && source "$ZDOTDIR/aliases"
 
-# eval "$(keychain --eval --quiet --dir "$XDG_DATA_HOME/keychain" --agents ssh id_github)"
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 
