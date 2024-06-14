@@ -1,0 +1,30 @@
+{{- $isHeadless := promptBoolOnce . "isHeadless" "Is headless machine" -}}
+{{- $isContainer := promptBoolOnce . "isContainer" "Inside a container" -}}
+{{- $battery := promptStringOnce . "battery" "Battery entry" -}}
+{{- $email := promptStringOnce . "email" "Email address" -}}
+
+[diff]
+	command = "delta"
+	args = ["-n", "-s", "--pager", "never", "{{ "{{" }} .Destination {{ "}}" }}", "{{ "{{" }} .Target {{ "}}" }}"]
+	{{- if eq .chezmoi.osRelease.id "debian" }}
+	pager = "batcat"
+	{{- else }}
+	pager = "bat"
+	{{- end }}
+
+[data]
+	isHeadless = {{ $isHeadless }}
+	isContainer = {{ $isContainer }}
+	isDesktop = {{ empty (stat "/sys/class/power_supply/$battery") }}
+
+	email = {{ $email | quote }}
+	nproc = {{ output "nproc" }}
+	battery = {{ $battery | quote }}
+
+	{{ if eq .chezmoi.osRelease.id "debian" -}}
+	icon = ""
+	{{- else if eq .chezmoi.osRelease.id "arch" }}
+	icon = ""
+	{{- else }}
+	icon = ""
+	{{ end }}

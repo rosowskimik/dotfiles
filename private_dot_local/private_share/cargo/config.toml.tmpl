@@ -1,0 +1,41 @@
+[alias]
+a = "add"
+b = "build"
+br = "build --release"
+c = "check"
+cc = "cache"
+cp = "clippy"
+e = "embed"
+er = "embed --release"
+f = "fmt"
+gen = "generate"
+i = "install"
+r = "run"
+rr = "run --release"
+t = "test"
+u = "install-update"
+wf = "whatfeatures -d"
+ver = "add --dry-run"
+
+[registries.crates-io]
+protocol = "sparse"
+
+[profile.debug]
+incremental = true
+
+[profile.release]
+strip = true
+codegen-units = 1
+incremental = false
+debug = false
+lto = "thin"
+
+[target.x86_64-unknown-linux-gnu]
+{{ if lookPath "mold" -}}
+rustflags = ["-Clink-arg=-fuse-ld=mold", "-Ctarget-cpu=native"]
+{{- else -}}
+rustflags = ["-Ctarget-cpu=native"]
+{{- end }}
+
+[target.x86_64-wasm32-unknown-unknown]
+linker = "rust-lld"

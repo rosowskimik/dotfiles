@@ -1,0 +1,15 @@
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
+  commit:
+    signOff: true
+gui:
+  language: "en"
+  border: single
+os:
+  editPreset: "nvim"
+keybinding:
+  commits:
+    moveDownCommit: 'J'
+    moveUpCommit: 'K'

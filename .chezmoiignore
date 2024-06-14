@@ -1,0 +1,18 @@
+{{- if .isHeadless }}
+.zshenv
+.config/alacritty
+.config/dunst
+.config/hyprland
+.config/tofi
+.config/waybar
+.config/wleave
+.config/code-flags.conf
+.config/electron13-flags.conf
+.config/electron25-flags.conf
+{{- else }}
+.zprofile
+{{- end }}
+
+{{- if ne .chezmoi.osRelease.id "arch" }}
+.config/paru
+{{- end }}
