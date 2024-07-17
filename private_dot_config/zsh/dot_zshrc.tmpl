@@ -80,9 +80,6 @@ source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 [[ -f "$ZDOTDIR/functions"  ]] && source "$ZDOTDIR/functions"
 [[ -f "$ZDOTDIR/aliases" ]] && source "$ZDOTDIR/aliases"
 
-{{ if (and (.isContainer) (eq .chezmoi.osRelease.id "arch")) -}}
-{{- end -}}
-
 {{- if .isHeadless }}
 eval "$(keychain --absolute --dir "$XDG_RUNTIME_DIR"/keychain --nogui --eval --quiet $(find ~/.ssh -name 'id_*' -and -not -name '*.pub'))"
 {{ end }}
