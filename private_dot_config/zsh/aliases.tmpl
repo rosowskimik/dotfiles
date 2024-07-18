@@ -1,5 +1,6 @@
 #!/bin/zsh
 unalias -a
+
 alias calias="chezmoi edit ${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/aliases && chezmoi apply ${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/aliases && source ${XDG_CONFIG_HOME:-${HOME}/.config}/zsh/aliases"
 
 {{- if eq .chezmoi.osRelease.id "debian" }}
@@ -8,7 +9,7 @@ alias fd=fdfind
 {{ else if eq .chezmoi.osRelease.id "arch"}}
 alias update-mirror="sudo reflector --sort rate --latest 20 --country CZ,DE,PL --fastest 10 --save /etc/pacman.d/mirrorlist --connection-timeout 10 --download-timeout 20"
 alias fetch_latest_arch="wget --passive-ftp -O ~/.local/share/libvirt/images/archlinux-x86_64.iso https://mirror.f4st.host/archlinux/iso/latest/archlinux-x86_64.iso"
-{{ end -}}
+{{- end }}
 
 alias cat=bat
 alias ls="eza --color=auto --group-directories-first -F"
@@ -18,6 +19,7 @@ alias ca="cargo"
 alias tma='tmux new-session -t {{ .icon }}'
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 alias lzg="lazygit"
+alias dlzg="lazygit --path {{ .chezmoi.sourceDir }}"
 alias gdb="gdb-multiarch"
 alias cdtemp='cd `mktemp -d`'
 alias ptemp='pushd `mktemp -d`'
@@ -25,10 +27,4 @@ alias zenv="source ${ZEPHYR_WEST}/bin/activate"
 
 {{- if not .isHeadless }}
 alias sudo-disp="xhost + local:"
-{{ end -}}
-
-{{- if eq .chezmoi.osRelease.id "arch"}}
-alias update-mirror="sudo reflector --sort rate --latest 20 --country CZ,DE,PL --fastest 10 --save /etc/pacman.d/mirrorlist --connection-timeout 10 --download-timeout 20"
-alias fetch_latest_arch="wget --passive-ftp -O ~/.local/share/libvirt/images/archlinux-x86_64.iso https://mirror.f4st.host/archlinux/iso/latest/archlinux-x86_64.iso"
 {{ end }}
-
