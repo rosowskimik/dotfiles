@@ -1,0 +1,23 @@
+{{ if eq .chezmoi.hostname "ThinkBookArch" }}
+listener {
+    timeout = 120
+    on-timeout = brightnessctl -s set 10
+    on-resume = brightnessctl -r
+}
+
+listener {
+    timeout = 300
+    on-timeout = loginctl lock-session
+}
+
+listener {
+    timeout = 330
+    on-timeout = hyprctl dispatch dpms off
+    on-resume = hyprctl dispatch dpms on
+}
+
+listener {
+    timeout = 900
+    on-timeout = systemctl suspend
+}
+{{- end -}}

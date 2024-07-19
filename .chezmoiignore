@@ -1,8 +1,9 @@
 {{- if .isHeadless }}
 .zshenv
+.bin/on_battery
 .config/alacritty
 .config/dunst
-.config/hyprland
+.config/hypr
 .config/tofi
 .config/waybar
 .config/wleave

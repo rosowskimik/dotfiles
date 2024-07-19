@@ -1,0 +1,3 @@
+{{- if eq .chezmoi.hostname "ThinkBookArch" }}
+monitor=eDP-1,1920x1200@60,auto,1
+{{- end }}

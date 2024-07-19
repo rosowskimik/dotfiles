@@ -1,0 +1,6 @@
+#!/bin/sh
+
+BATTERY={{- .battery }}
+
+test "$(cat /sys/class/power_supply/$BATTERY/status)" = "Discharging"
+
