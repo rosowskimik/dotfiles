@@ -49,8 +49,10 @@ export PAGER=bat
 {{- end }}
 
 # Cleanup
-export HISTFILE="$XDG_DATA_HOME/zsh_history"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export HISTFILE="$XDG_STATE_HOME/zsh/history"
+export HISTSIZE=20000
+export SAVEHIST="$HISTSIZE"
 export LESSHISTFILE=-
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 

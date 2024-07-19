@@ -11,16 +11,18 @@ fpath=($ZDOTDIR/completions $fpath)
 
 zstyle ':completion:*' menu select gain-privileges 1
 
-setopt share_history
 setopt globdots
-setopt histignoredups
+setopt share_history
+setopt extended_history
+setopt hist_ignore_dups
+setopt hist_save_no_dups
 setopt auto_cd
 setopt extended_glob
-setopt longlistjobs
+setopt long_list_jobs
 setopt hash_list_all
 setopt pushd_ignore_dups
-setopt completeinword
-setopt noshwordsplit
+setopt complete_inword
+setopt no_sh_wordsplit
 
 bindkey -e
 typeset -g -A key
