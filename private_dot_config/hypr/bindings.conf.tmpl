@@ -3,8 +3,13 @@ $mainMod = SUPER
 # Exec
 bind = $mainMod,        return,     exec, alacritty
 bind = $mainMod SHIFT,  return,     exec, nemo
+{{- if eq .chezmoi.hostname "ant" }}
+bind = $mainMod,        B,          exec, firefox
+bind = Ctrl SHIFT,      P,          exec, firefox --private-window
+{{ else }}
 bind = $mainMod,        B,          exec, firefox-developer-edition
 bind = Ctrl SHIFT,      P,          exec, firefox-developer-edition --private-window
+{{- end }}
 bind = $mainMod,        N,          exec, mousepad
 bind = $mainMod,        M,          exec, mailspring --password-store="gnome-libsecret"
 bind = $mainMod,        P,          exec, pkill tofi-drun || tofi-drun -c ~/.config/tofi/tofi-run.conf

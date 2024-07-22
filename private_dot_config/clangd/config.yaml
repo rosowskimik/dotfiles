@@ -6,3 +6,11 @@ CompileFlags:
     - -fconserve-stack
     - -mrecord-mcount
     - -fmin-function-alignment*
+    - -mno-fdpic
+    - -fno-ipa-sra
+    - -fno-printf-return-value
+    - -mfp16-format=ieee
+    - -fno-reorder-functions
+    - -mword-relocations
+    - -mno-thumb-interwork
+    - -mgeneral-regs-only

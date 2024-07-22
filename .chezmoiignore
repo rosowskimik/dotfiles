@@ -1,6 +1,5 @@
 {{- if .isHeadless }}
 .zshenv
-.bin/on_battery
 .config/alacritty
 .config/dunst
 .config/hypr
@@ -12,6 +11,10 @@
 .config/electron25-flags.conf
 {{- else }}
 .zprofile
+{{- end }}
+
+{{- if .isDesktop }}
+.bin/on_battery
 {{- end }}
 
 {{- if ne .chezmoi.osRelease.id "arch" }}

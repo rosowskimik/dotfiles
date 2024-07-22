@@ -6,8 +6,11 @@ input {
     kb_rules =
 
     follow_mouse = 1
+    accel_profile = flat
+    {{- if eq .chezmoi.hostname "ant" }}
+    sensitivity = 1.05
+    {{- end }}
 
-    sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
     repeat_rate = 35
     repeat_delay = 300
 

@@ -20,4 +20,15 @@ listener {
     timeout = 900
     on-timeout = systemctl suspend
 }
+{{ else if eq .chezmoi.hostname "ant" }}
+listener {
+    timeout = 210
+    on-timeout = loginctl lock-session
+}
+
+listener {
+    timeout = 600
+    on-timeout = hyprctl dispatch dpms off
+    on-resume = hyprctl dispatch dpms on
+}
 {{- end -}}

@@ -13,6 +13,10 @@ general {
 cursor {
     inactive_timeout = 15
     persistent_warps = true
+    hide_on_touch = true
+    {{- if .isNvidia }}
+    no_hardware_cursors = true
+    {{- end }}
 }
 
 decoration {
