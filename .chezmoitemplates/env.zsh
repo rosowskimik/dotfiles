@@ -70,7 +70,7 @@ append_path "$HOME/.local/bin"
 {{- if eq .chezmoi.osRelease.id "debian" }}
 append_path "$RUSTUP_HOME/bin"
 append_path "$GOHOME/bin"
-{{ end -}}
+{{- end }}
 append_path "$CARGO_HOME/bin"
 append_path "$GOPATH/bin"
 append_path "$ZIG_HOME"

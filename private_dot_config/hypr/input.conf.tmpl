@@ -9,6 +9,8 @@ input {
     accel_profile = flat
     {{- if eq .chezmoi.hostname "ant" }}
     sensitivity = 1.05
+    {{- else }}
+    sensitivity = 1.00
     {{- end }}
 
     repeat_rate = 35
