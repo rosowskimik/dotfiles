@@ -43,9 +43,9 @@ export ZEPHYR_SDK_INSTALL_DIR="$ZEPHYR_WORKSPACE/sdks"
 # Defaults
 export EDITOR=nvim
 {{- if eq .chezmoi.osRelease.id "debian" }}
-export PAGER=batcat
+export PAGER="batcat -p"
 {{- else }}
-export PAGER=bat
+export PAGER="bat -p"
 {{- end }}
 
 # Cleanup
