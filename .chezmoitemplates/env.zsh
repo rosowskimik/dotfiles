@@ -68,6 +68,7 @@ append_path "$HOME/.bin"
 append_path "$HOME/.local/bin"
 
 {{- if eq .chezmoi.osRelease.id "debian" }}
+append_path /opt/renode_portable
 append_path "$RUSTUP_HOME/bin"
 append_path "$GOHOME/bin"
 {{- end }}
