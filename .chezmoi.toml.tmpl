@@ -1,20 +1,16 @@
 {{- $isHeadless := promptBoolOnce . "isHeadless" "Is headless machine" -}}
 {{- $isContainer := promptBoolOnce . "isContainer" "Inside a container" -}}
 {{- $isNvidia := promptBoolOnce . "isNvidia" "Uses Nvidia" -}}
-{{- $battery := promptStringOnce . "battery" "Battery entry" -}}
 {{- $email := promptStringOnce . "email" "Email address" -}}
 
+{{- $battery := "" }}
 {{- $chassisType := "desktop" }}
-{{- if eq .chezmoi.os "darwin" }}
-{{-   if contains "MacBook" (output "sysctl" "-n" "hw.model") }}
-{{-     $chassisType = "laptop" }}
-{{-   else }}
-{{-     $chassisType = "desktop" }}
-{{-   end }}
-{{- else if eq .chezmoi.os "linux" }}
+
+{{- if isExecutable "hostnamectl" }}
 {{-   $chassisType = (output "hostnamectl" "--json=short" | mustFromJson).Chassis }}
-{{- else if eq .chezmoi.os "windows" }}
-{{-   $chassisType = (output "powershell.exe" "-NoProfile" "-NonInteractive" "-Command" "if ((Get-CimInstance -Class Win32_Battery | Measure-Object).Count -gt 0) { Write-Output 'laptop' } else { Write-Output 'desktop' }") | trim }}
+{{-   if eq .chassisType "laptop" }}
+{{-     $battery := promptStringOnce . "battery" "Battery entry" -}}
+{{-   end }}
 {{- end }}
 
 [diff]
@@ -34,7 +30,6 @@
 
 	email = {{ $email | quote }}
 	nproc = {{ output "nproc" }}
-	battery = {{ $battery | quote }}
 
 	{{ if eq .chezmoi.osRelease.id "debian" -}}
 	icon = ""
@@ -43,6 +38,8 @@
 	{{- else }}
 	icon = ""
 	{{- end }}
+
+	battery = {{ $battery | quote }}
 
 	{{- if eq .chezmoi.hostname "ThinkBookArch" }}
 	wall = "/home/{{- .chezmoi.username -}}/Pictures/Wallpapers/wallhaven-rddgwm.jpg"

@@ -72,6 +72,9 @@ fi
 {{ if eq .chezmoi.osRelease.id "arch" -}}
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+{{ else if eq .chezmoi.osRelease.id "gentoo" -}}
+source /usr/share/zsh/site-functions/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/site-functions/zsh-autosuggestions.zsh
 {{ else -}}
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -80,12 +83,12 @@ source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 [[ -f "$ZDOTDIR/functions"  ]] && source "$ZDOTDIR/functions"
 [[ -f "$ZDOTDIR/aliases" ]] && source "$ZDOTDIR/aliases"
 
-{{- if .isHeadless }}
+{{- if and (isExecutable "keychain") .isHeadless }}
 eval "$(keychain --absolute --dir "$XDG_RUNTIME_DIR"/keychain --nogui --eval --quiet $(find ~/.ssh -name 'id_*' -and -not -name '*.pub'))"
-{{ end }}
+{{- end }}
 
 {{- if lookPath "zoxide" }}
 eval "$(zoxide init zsh)"
-{{ end -}}
+{{- end }}
 
 eval "$(starship init zsh)"
