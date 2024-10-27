@@ -44,6 +44,8 @@ export ZEPHYR_SDK_INSTALL_DIR="$ZEPHYR_WORKSPACE/sdks"
 export EDITOR=nvim
 {{- if eq .chezmoi.osRelease.id "debian" }}
 export PAGER="batcat -p"
+{{- else if eq .chezmoi.osRelease.id "gentoo" }}
+export PAGER="less"
 {{- else }}
 export PAGER="bat -p"
 {{- end }}
@@ -69,12 +71,18 @@ append_path "$HOME/.local/bin"
 
 {{- if eq .chezmoi.osRelease.id "debian" }}
 append_path /usr/games
-append_path /opt/renode_portable
-append_path "$RUSTUP_HOME/bin"
 append_path "$GOHOME/bin"
 {{- end }}
+
+{{- if eq .chezmoi.osRelease.id "gentoo" }}
+prepend_path "$CARGO_HOME/bin"
+{{- else }}
 append_path "$CARGO_HOME/bin"
+{{- end }}
+
 append_path "$GOPATH/bin"
 append_path "$ZIG_HOME"
+
+append_path /opt/renode_portable
 
 export PATH

@@ -67,7 +67,6 @@ if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
 	add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
 	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
 fi
-# bindkey -e
 
 {{ if eq .chezmoi.osRelease.id "arch" -}}
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -83,7 +82,7 @@ source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 [[ -f "$ZDOTDIR/functions"  ]] && source "$ZDOTDIR/functions"
 [[ -f "$ZDOTDIR/aliases" ]] && source "$ZDOTDIR/aliases"
 
-{{- if and (isExecutable "keychain") .isHeadless }}
+{{ if and (lookPath "keychain") .isHeadless -}}
 eval "$(keychain --absolute --dir "$XDG_RUNTIME_DIR"/keychain --nogui --eval --quiet $(find ~/.ssh -name 'id_*' -and -not -name '*.pub'))"
 {{- end }}
 
