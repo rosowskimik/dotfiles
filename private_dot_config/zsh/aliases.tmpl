@@ -13,6 +13,7 @@ alias fetch_latest_arch="wget --passive-ftp -O ~/.local/share/libvirt/images/arc
 {{ if lookPath "doas" }}
 alias sudo="doas"
 {{- end -}}
+alias fetch_latest_arch="wget --passive-ftp -O ~/.local/share/libvirt/images/archlinux-x86_64.iso https://arch.midov.pl/arch/iso/latest/archlinux-x86_64.iso"
 {{- end }}
 
 alias cat=bat
