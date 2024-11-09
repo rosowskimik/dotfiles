@@ -3,14 +3,24 @@
 {{- $isNvidia := promptBoolOnce . "isNvidia" "Uses Nvidia" -}}
 {{- $email := promptStringOnce . "email" "Email address" -}}
 
-{{- $battery := "" }}
 {{- $chassisType := "desktop" }}
+{{- $battery := "" }}
 
-{{- if isExecutable "hostnamectl" }}
-{{-   $chassisType = (output "hostnamectl" "--json=short" | mustFromJson).Chassis }}
-{{-   if eq .chassisType "laptop" }}
-{{-     $battery := promptStringOnce . "battery" "Battery entry" -}}
+
+{{- if (eq .chezmoi.os "darwin") }}
+{{-   if contains "MacBook" (output "sysctl" "-n" "hw.model") }}
+{{-     $chassisType = "laptop" }}
+{{-   else }}
+{{-     $chassisType = "desktop" }}
 {{-   end }}
+{{- else if and (eq .chezmoi.os "linux") (lookPath "hostnamectl") }}
+{{-   $chassisType = (output "hostnamectl" "--json=short" | mustFromJson).Chassis }}
+{{- else if (eq .chezmoi.os "windows") }}
+{{-   $chassisType = (output "powershell.exe" "-noprofile" "-command" "if (Get-WmiObject -Class win32_battery -ComputerName localhost) { echo laptop } else { echo desktop }") }}
+{{- end -}}
+
+{{- if eq $chassisType "laptop" }}
+{{- $battery = promptStringOnce . "battery" "Battery Path" }}
 {{- end }}
 
 [diff]
@@ -28,8 +38,10 @@
 	isDesktop = {{ eq $chassisType "desktop" }}
 	isNvidia = {{ $isNvidia }}
 
+
 	email = {{ $email | quote }}
 	nproc = {{ output "nproc" }}
+	chassisType = {{ $chassisType | quote }}
 
 	{{ if eq .chezmoi.osRelease.id "debian" -}}
 	icon = ""
