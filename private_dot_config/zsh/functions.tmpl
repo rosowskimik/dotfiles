@@ -37,6 +37,24 @@ function salias () {
     return 0
 }
 
+{{- if eq .chezmoi.osRelease.id "gentoo" }}
+function kernel_nconfig () {
+    ebuild_dir="/var/db/repos/gentoo/sys-kernel/gentoo-kernel"
+    savedconfig_dir="/etc/portage/savedconfig/sys-kernel"
+
+    current_version=$(uname -a | cut -d' ' -f3 | cut -d'-' -f1)
+    pick=${$(ls ${ebuild_dir}/*.ebuild | fzf -q ${current_version} | cut -d'/' -f8)%".ebuild"}
+
+    modprep_dir=$(doas ebuild ${ebuild_dir}/${pick}.ebuild configure | tee /dev/stderr | grep -m1 Leaving | cut -d' ' -f4 | tr -d "'")
+
+    doas make -C ${modprep_dir} nconfig
+    doas cp ${modprep_dir}/.config ${savedconfig_dir}/${pick}
+
+    delta ${savedconfig_dir}/gentoo-kernel ${savedconfig_dir}/${pick}
+
+    printf "Config setup. Now run\ndoas emerge -av sys-kernel/gentoo-kernel\nto rebuild kernel"
+}
+{{- end }}
 
 function disasm() {
     gdb-multiarch --batch --nx -ex "disas/r ${2}" "$1"

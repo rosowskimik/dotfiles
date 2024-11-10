@@ -8,12 +8,11 @@ alias bat=batcat
 alias fd=fdfind
 {{- else if eq .chezmoi.osRelease.id "arch" }}
 alias update-mirror="sudo reflector --sort rate --latest 20 --country CZ,DE,PL --fastest 10 --save /etc/pacman.d/mirrorlist --connection-timeout 10 --download-timeout 20"
-alias fetch_latest_arch="wget --passive-ftp -O ~/.local/share/libvirt/images/archlinux-x86_64.iso https://mirror.f4st.host/archlinux/iso/latest/archlinux-x86_64.iso"
-{{ else if eq .chezmoi.osRelease.id "gentoo" -}}
-{{ if lookPath "doas" }}
+alias fetch_latest_arch="wget --passive-ftp -O ~/.local/share/libvirt/images/archlinux-x86_64.iso https://arch.midov.pl/arch/iso/latest/archlinux-x86_64.iso"
+{{- else if eq .chezmoi.osRelease.id "gentoo" }}
+{{- if lookPath "doas" }}
 alias sudo="doas"
 {{- end -}}
-alias fetch_latest_arch="wget --passive-ftp -O ~/.local/share/libvirt/images/archlinux-x86_64.iso https://arch.midov.pl/arch/iso/latest/archlinux-x86_64.iso"
 {{- end }}
 
 alias cat=bat
