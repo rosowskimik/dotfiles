@@ -30,10 +30,12 @@ decoration {
         passes = 1
     }
 
-    drop_shadow = false
-    shadow_range = 3
-    shadow_render_power = 3
-    col.shadow = rgba(1a1a1aee)
+    shadow {
+        enabled = false
+        range = 3
+        render_power = 3
+        color = rgba(1a1a1aee)
+    }
 }
 
 animations {
@@ -52,7 +54,6 @@ dwindle {
     # See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
     pseudotile = true
     preserve_split = true
-    no_gaps_when_only = 1
 }
 
 # vim: ft=hyprlang
