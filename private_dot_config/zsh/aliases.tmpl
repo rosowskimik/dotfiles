@@ -18,6 +18,8 @@ alias sudo="doas"
 alias cat=bat
 alias ls="eza --color=auto --group-directories-first -F"
 alias l="ls --smart-group -lahM@"
+alias grep="grep --color=auto"
+alias open=xdg-open
 alias ip='command ip --color=auto'
 alias ca="cargo"
 alias tma='tmux new-session -t {{ .icon }}'
@@ -25,7 +27,6 @@ alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 alias lzg="lazygit"
 alias dlzg="lazygit --path {{ .chezmoi.sourceDir }}"
 alias nlzg="lazygit --path $XDG_CONFIG_HOME/nvim"
-alias gdb="gdb-multiarch"
 alias cdtemp='cd `mktemp -d`'
 alias ptemp='pushd `mktemp -d`'
 alias zenv="source ${ZEPHYR_WEST}/bin/activate"
