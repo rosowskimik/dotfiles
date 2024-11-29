@@ -1,16 +1,17 @@
 CompileFlags:
   Remove:
-    - -mpreferred-stack-boundary*
-    - -mindirect-branch*
-    - -fno-allow-store-data-races
     - -fconserve-stack
-    - -mrecord-mcount
     - -fmin-function-alignment*
-    - -mno-fdpic
+    - -fno-allow-store-data-races
     - -fno-ipa-sra
     - -fno-printf-return-value
-    - -mfp16-format=ieee
     - -fno-reorder-functions
-    - -mword-relocations
-    - -mno-thumb-interwork
+    - -fstrict-volatile-bitfields
+    - -mfp16-format=ieee
     - -mgeneral-regs-only
+    - -mindirect-branch*
+    - -mno-fdpic
+    - -mno-thumb-interwork
+    - -mpreferred-stack-boundary*
+    - -mrecord-mcount
+    - -mword-relocations
