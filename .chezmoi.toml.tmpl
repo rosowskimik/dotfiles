@@ -56,8 +56,13 @@
 	{{- if eq .chezmoi.hostname "ThinkBookArch" }}
 	wall = "/home/{{- .chezmoi.username -}}/Pictures/Wallpapers/wallhaven-rddgwm.jpg"
 	lock = "/home/{{- .chezmoi.username -}}/Pictures/Wallpapers/wallhaven-3lyrvy.png"
-	{{- end }}
-	{{- if eq .chezmoi.hostname "ant" }}
+	{{- else if eq .chezmoi.hostname "B650Arch" }}
+	wall = "/home/{{- .chezmoi.username -}}/Pictures/Wallpapers/wallhaven-rddgwm.jpg"
+	lock = "/home/{{- .chezmoi.username -}}/Pictures/Wallpapers/wallhaven-3lyrvy.png"
+	{{- else if eq .chezmoi.hostname "ant" }}
 	wall = "/home/{{- .chezmoi.username -}}/Pictures/Wall/wallhaven-6dgz2l.jpg"
 	lock = "/home/{{- .chezmoi.username -}}/Pictures/Wall/wallhaven-3lyrvy.png"
+	{{- else }}
+	wall = "/home/{{- .chezmoi.username -}}/Pictures/Wallpapers/wallhaven-rddgwm.jpg"
+	lock = "/home/{{- .chezmoi.username -}}/Pictures/Wallpapers/wallhaven-3lyrvy.png"
 	{{- end }}

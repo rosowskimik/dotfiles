@@ -7,12 +7,11 @@ bind = $mainMod SHIFT,  return,     exec, nemo
 bind = $mainMod,        B,          exec, firefox
 bind = Ctrl SHIFT,      P,          exec, firefox --private-window
 {{ else }}
-bind = $mainMod,        B,          exec, firefox-developer-edition
-bind = Ctrl SHIFT,      P,          exec, firefox-developer-edition --private-window
+bind = $mainMod,        B,          exec, firefox
+bind = Ctrl SHIFT,      P,          exec, firefox --private-window
 {{- end }}
 bind = $mainMod,        N,          exec, mousepad
-bind = $mainMod,        M,          exec, mailspring --password-store="gnome-libsecret"
-bind = $mainMod,        P,          exec, pkill tofi-drun || tofi-drun -c ~/.config/tofi/tofi-run.conf
+bind = $mainMod,        P,          exec, pkill tofi-drun || tofi-drun -c {{ .chezmoi.homeDir }}/.config/tofi/tofi-run.conf
 bind = $mainMod,        V,          exec, cliphist list | tofi -c ~/.config/tofi/tofi-clipboard.conf | cliphist decode | wl-copy
 bind = $mainMod SHIFT,  V,          exec, nwg-clipman
 bind = $mainMod SHIFT,  C,          exec, hyprpicker -f hex -a | xargs -I_ notify-send -t 2500 "Copied _ to clipboard"

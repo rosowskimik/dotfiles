@@ -4,6 +4,7 @@
 .config/dunst
 .config/hypr
 .config/tofi
+.config/uwsm
 .config/waybar
 .config/wleave
 .config/code-flags.conf

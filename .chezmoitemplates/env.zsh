@@ -37,7 +37,6 @@ export ZIG_HOME="$COMPILERS_BASE/zig"
 # Zephyr stuff
 export ZEPHYR_WORKSPACE="$XDG_OPT_HOME/zephyrproject"
 export ZEPHYR_WEST="$ZEPHYR_WORKSPACE/west"
-export ZEPHYR_BASE="$ZEPHYR_WORKSPACE/zephyr"
 export ZEPHYR_SDK_INSTALL_DIR="$ZEPHYR_WORKSPACE/sdks"
 
 # Defaults

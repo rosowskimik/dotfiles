@@ -30,6 +30,7 @@ alias nlzg="lazygit --path $XDG_CONFIG_HOME/nvim"
 alias cdtemp='cd `mktemp -d`'
 alias ptemp='pushd `mktemp -d`'
 alias zenv="source ${ZEPHYR_WEST}/bin/activate"
+alias zzenv="export ZEPHYR_BASE="${ZEPHYR_WORKSPACE}/zephyr" && zenv"
 
 {{- if not .isHeadless }}
 alias sudo-disp="xhost + local:"

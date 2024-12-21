@@ -1,5 +1,8 @@
 {{ if not .isHeadless -}}
-[ $(tty) = "/dev/tty1" ] && exec Hyprland
+# Universal Wayland Session Manager
+if uwsm check may-start; then
+	exec uwsm start -S hyprland.desktop
+fi
 {{ end -}}
 
 autoload -Uz compinit promptinit
