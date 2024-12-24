@@ -1,20 +1,19 @@
-# See https://wiki.hyprland.org/Configuring/Monitors/
-{{- template "monitors" . -}}
-monitor=,preferred,auto,auto
+# Per-host monitor config
+source = {{ .chezmoi.homeDir }}/.config/hypr/monitor.conf
 
 # Startup programs
-source = ~/.config/hypr/startup.conf
+source = {{ .chezmoi.homeDir }}/.config/hypr/startup.conf
 
 # Input config
-source = ~/.config/hypr/input.conf
+source = {{ .chezmoi.homeDir }}/.config/hypr/input.conf
 
 # Keybinds
-source = ~/.config/hypr/bindings.conf
+source = {{ .chezmoi.homeDir }}/.config/hypr/bindings.conf
 
 # Rules
-source = ~/.config/hypr/rules.conf
+source = {{ .chezmoi.homeDir }}/.config/hypr/rules.conf
 
 # Style
-source = ~/.config/hypr/style.conf
+source = {{ .chezmoi.homeDir }}/.config/hypr/style.conf
 
 # vim: ft=hyprlang
