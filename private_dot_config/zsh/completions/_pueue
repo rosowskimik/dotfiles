@@ -14,7 +14,7 @@ _pueue() {
     fi
 
     local context curcontext="$curcontext" state line
-    _arguments "${_arguments_options[@]}" : \
+    _arguments "${_arguments_options[@]}" \
 '--color=[Colorize the output; auto enables color output when connected to a tty]:COLOR:(auto never always)' \
 '-c+[If provided, Pueue only uses this config file. This path can also be set via the "PUEUE_CONFIG_PATH" environment variable. The commandline option overwrites the environment variable!]:CONFIG:_files' \
 '--config=[If provided, Pueue only uses this config file. This path can also be set via the "PUEUE_CONFIG_PATH" environment variable. The commandline option overwrites the environment variable!]:CONFIG:_files' \
@@ -36,7 +36,7 @@ _pueue() {
         curcontext="${curcontext%:*:*}:pueue-command-$line[1]:"
         case $line[1] in
             (add)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 '-w+[Specify current working directory]:working-directory:_files -/' \
 '--working-directory=[Specify current working directory]:working-directory:_files -/' \
 '(-i --immediate)-d+[Prevents the task from being enqueued until '\''delay'\'' elapses. See "enqueue" for accepted formats]:delay: ' \
@@ -63,14 +63,14 @@ _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (remove)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 '-h[Print help]' \
 '--help[Print help]' \
 '*::task_ids -- The task ids to be removed:' \
 && ret=0
 ;;
 (switch)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 '-h[Print help]' \
 '--help[Print help]' \
 ':task_id_1 -- The first task id:' \
@@ -78,14 +78,14 @@ _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (stash)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 '-h[Print help]' \
 '--help[Print help]' \
 '*::task_ids -- Stash these specific tasks:' \
 && ret=0
 ;;
 (enqueue)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 '-d+[Delay enqueuing these tasks until '\''delay'\'' elapses. See DELAY FORMAT below]:delay: ' \
 '--delay=[Delay enqueuing these tasks until '\''delay'\'' elapses. See DELAY FORMAT below]:delay: ' \
 '-h[Print help]' \
@@ -94,7 +94,7 @@ _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (start)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 '(-a --all)-g+[Resume a specific group and all paused tasks in it. The group will be set to running and its paused tasks will be resumed]:GROUP: ' \
 '(-a --all)--group=[Resume a specific group and all paused tasks in it. The group will be set to running and its paused tasks will be resumed]:GROUP: ' \
 '-a[Resume all groups! All groups will be set to running and paused tasks will be resumed]' \
@@ -107,7 +107,7 @@ _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (restart)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 '(-a --all-failed)-g+[Like \`--all-failed\`, but only restart tasks failed tasks of a specific group. The group will be set to running and its paused tasks will be resumed]:FAILED_IN_GROUP: ' \
 '(-a --all-failed)--failed-in-group=[Like \`--all-failed\`, but only restart tasks failed tasks of a specific group. The group will be set to running and its paused tasks will be resumed]:FAILED_IN_GROUP: ' \
 '-a[Restart all failed tasks across all groups. Nice to use in combination with \`-i/--in-place\`]' \
@@ -133,7 +133,7 @@ _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (pause)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 '(-a --all)-g+[Pause a specific group]:GROUP: ' \
 '(-a --all)--group=[Pause a specific group]:GROUP: ' \
 '-a[Pause all groups!]' \
@@ -148,7 +148,7 @@ _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (kill)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 '(-a --all)-g+[Kill all running tasks in a group. This also pauses the group]:GROUP: ' \
 '(-a --all)--group=[Kill all running tasks in a group. This also pauses the group]:GROUP: ' \
 '-s+[Send a UNIX signal instead of simply killing the process. DISCLAIMER\: This bypasses Pueue'\''s process handling logic! You might enter weird invalid states, use at your own descretion]:SIGNAL: ' \
@@ -163,7 +163,7 @@ _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (send)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 '-h[Print help]' \
 '--help[Print help]' \
 ':task_id -- The id of the task:' \
@@ -171,7 +171,7 @@ _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (edit)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 '-c[Edit the task'\''s command]' \
 '--command[Edit the task'\''s command]' \
 '-p[Edit the task'\''s path]' \
@@ -186,7 +186,7 @@ _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (group)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 '-j[Print the list of groups as json]' \
 '--json[Print the list of groups as json]' \
 '-h[Print help]' \
@@ -202,7 +202,7 @@ _arguments "${_arguments_options[@]}" : \
         curcontext="${curcontext%:*:*}:pueue-group-command-$line[1]:"
         case $line[1] in
             (add)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 '-p+[Set the amount of parallel tasks this group can have. Setting this to 0 means an unlimited amount of parallel tasks]:PARALLEL: ' \
 '--parallel=[Set the amount of parallel tasks this group can have. Setting this to 0 means an unlimited amount of parallel tasks]:PARALLEL: ' \
 '-h[Print help]' \
@@ -211,14 +211,14 @@ _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (remove)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 '-h[Print help]' \
 '--help[Print help]' \
 ':name:' \
 && ret=0
 ;;
 (help)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 ":: :_pueue__group__help_commands" \
 "*::: :->help" \
 && ret=0
@@ -230,15 +230,15 @@ _arguments "${_arguments_options[@]}" : \
         curcontext="${curcontext%:*:*}:pueue-group-help-command-$line[1]:"
         case $line[1] in
             (add)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (remove)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (help)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
         esac
@@ -250,7 +250,7 @@ esac
 esac
 ;;
 (status)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 '-g+[Only show tasks of a specific group]:GROUP: ' \
 '--group=[Only show tasks of a specific group]:GROUP: ' \
 '-j[Print the current state as json to stdout. This does not include the output of tasks. Use \`log -j\` if you want everything]' \
@@ -261,7 +261,7 @@ _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (format-status)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 '-g+[Only show tasks of a specific group]:GROUP: ' \
 '--group=[Only show tasks of a specific group]:GROUP: ' \
 '-h[Print help]' \
@@ -269,7 +269,7 @@ _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (log)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 '(-f --full)-l+[Only print the last X lines of each task'\''s output. This is done by default if you'\''re looking at multiple tasks]:LINES: ' \
 '(-f --full)--lines=[Only print the last X lines of each task'\''s output. This is done by default if you'\''re looking at multiple tasks]:LINES: ' \
 '-j[Print the resulting tasks and output as json. By default only the last lines will be returned unless --full is provided. Take care, as the json cannot be streamed! If your logs are really huge, using --full can use all of your machine'\''s RAM]' \
@@ -282,7 +282,7 @@ _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (follow)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 '-l+[Only print the last X lines of the output before following]:LINES: ' \
 '--lines=[Only print the last X lines of the output before following]:LINES: ' \
 '-h[Print help]' \
@@ -291,7 +291,7 @@ _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (wait)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 '(-a --all)-g+[Wait for all tasks in a specific group]:GROUP: ' \
 '(-a --all)--group=[Wait for all tasks in a specific group]:GROUP: ' \
 '-s+[Wait for tasks to reach a specific task status]:STATUS: ' \
@@ -306,7 +306,7 @@ _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (clean)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 '-g+[Only clean tasks of a specific group]:GROUP: ' \
 '--group=[Only clean tasks of a specific group]:GROUP: ' \
 '-s[Only clean tasks that finished successfully]' \
@@ -316,7 +316,7 @@ _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (reset)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 '-c[Deprecated\: this switch no longer has any effect]' \
 '--children[Deprecated\: this switch no longer has any effect]' \
 '-f[Don'\''t ask for any confirmation]' \
@@ -326,13 +326,13 @@ _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (shutdown)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 '-h[Print help]' \
 '--help[Print help]' \
 && ret=0
 ;;
 (parallel)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 '-g+[Set the amount for a specific group]:group: ' \
 '--group=[Set the amount for a specific group]:group: ' \
 '-h[Print help]' \
@@ -341,7 +341,7 @@ _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (completions)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 '-h[Print help]' \
 '--help[Print help]' \
 ':shell -- The target shell:(bash elvish fish power-shell zsh nushell)' \
@@ -349,7 +349,7 @@ _arguments "${_arguments_options[@]}" : \
 && ret=0
 ;;
 (help)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 ":: :_pueue__help_commands" \
 "*::: :->help" \
 && ret=0
@@ -361,51 +361,51 @@ _arguments "${_arguments_options[@]}" : \
         curcontext="${curcontext%:*:*}:pueue-help-command-$line[1]:"
         case $line[1] in
             (add)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (remove)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (switch)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (stash)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (enqueue)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (start)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (restart)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (pause)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (kill)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (send)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (edit)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (group)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 ":: :_pueue__help__group_commands" \
 "*::: :->group" \
 && ret=0
@@ -417,11 +417,11 @@ _arguments "${_arguments_options[@]}" : \
         curcontext="${curcontext%:*:*}:pueue-help-group-command-$line[1]:"
         case $line[1] in
             (add)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (remove)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
         esac
@@ -429,47 +429,47 @@ _arguments "${_arguments_options[@]}" : \
 esac
 ;;
 (status)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (format-status)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (log)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (follow)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (wait)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (clean)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (reset)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (shutdown)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (parallel)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (completions)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
 (help)
-_arguments "${_arguments_options[@]}" : \
+_arguments "${_arguments_options[@]}" \
 && ret=0
 ;;
         esac
@@ -515,35 +515,85 @@ _pueue__add_commands() {
     local commands; commands=()
     _describe -t commands 'pueue add commands' commands "$@"
 }
+(( $+functions[_pueue__group__add_commands] )) ||
+_pueue__group__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'pueue group add commands' commands "$@"
+}
+(( $+functions[_pueue__group__help__add_commands] )) ||
+_pueue__group__help__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'pueue group help add commands' commands "$@"
+}
+(( $+functions[_pueue__help__add_commands] )) ||
+_pueue__help__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'pueue help add commands' commands "$@"
+}
+(( $+functions[_pueue__help__group__add_commands] )) ||
+_pueue__help__group__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'pueue help group add commands' commands "$@"
+}
 (( $+functions[_pueue__clean_commands] )) ||
 _pueue__clean_commands() {
     local commands; commands=()
     _describe -t commands 'pueue clean commands' commands "$@"
+}
+(( $+functions[_pueue__help__clean_commands] )) ||
+_pueue__help__clean_commands() {
+    local commands; commands=()
+    _describe -t commands 'pueue help clean commands' commands "$@"
 }
 (( $+functions[_pueue__completions_commands] )) ||
 _pueue__completions_commands() {
     local commands; commands=()
     _describe -t commands 'pueue completions commands' commands "$@"
 }
+(( $+functions[_pueue__help__completions_commands] )) ||
+_pueue__help__completions_commands() {
+    local commands; commands=()
+    _describe -t commands 'pueue help completions commands' commands "$@"
+}
 (( $+functions[_pueue__edit_commands] )) ||
 _pueue__edit_commands() {
     local commands; commands=()
     _describe -t commands 'pueue edit commands' commands "$@"
+}
+(( $+functions[_pueue__help__edit_commands] )) ||
+_pueue__help__edit_commands() {
+    local commands; commands=()
+    _describe -t commands 'pueue help edit commands' commands "$@"
 }
 (( $+functions[_pueue__enqueue_commands] )) ||
 _pueue__enqueue_commands() {
     local commands; commands=()
     _describe -t commands 'pueue enqueue commands' commands "$@"
 }
+(( $+functions[_pueue__help__enqueue_commands] )) ||
+_pueue__help__enqueue_commands() {
+    local commands; commands=()
+    _describe -t commands 'pueue help enqueue commands' commands "$@"
+}
 (( $+functions[_pueue__follow_commands] )) ||
 _pueue__follow_commands() {
     local commands; commands=()
     _describe -t commands 'pueue follow commands' commands "$@"
 }
+(( $+functions[_pueue__help__follow_commands] )) ||
+_pueue__help__follow_commands() {
+    local commands; commands=()
+    _describe -t commands 'pueue help follow commands' commands "$@"
+}
 (( $+functions[_pueue__format-status_commands] )) ||
 _pueue__format-status_commands() {
     local commands; commands=()
     _describe -t commands 'pueue format-status commands' commands "$@"
+}
+(( $+functions[_pueue__help__format-status_commands] )) ||
+_pueue__help__format-status_commands() {
+    local commands; commands=()
+    _describe -t commands 'pueue help format-status commands' commands "$@"
 }
 (( $+functions[_pueue__group_commands] )) ||
 _pueue__group_commands() {
@@ -554,10 +604,13 @@ _pueue__group_commands() {
     )
     _describe -t commands 'pueue group commands' commands "$@"
 }
-(( $+functions[_pueue__group__add_commands] )) ||
-_pueue__group__add_commands() {
-    local commands; commands=()
-    _describe -t commands 'pueue group add commands' commands "$@"
+(( $+functions[_pueue__help__group_commands] )) ||
+_pueue__help__group_commands() {
+    local commands; commands=(
+'add:Add a group by name' \
+'remove:Remove a group by name. This will move all tasks in this group to the default group!' \
+    )
+    _describe -t commands 'pueue help group commands' commands "$@"
 }
 (( $+functions[_pueue__group__help_commands] )) ||
 _pueue__group__help_commands() {
@@ -568,25 +621,10 @@ _pueue__group__help_commands() {
     )
     _describe -t commands 'pueue group help commands' commands "$@"
 }
-(( $+functions[_pueue__group__help__add_commands] )) ||
-_pueue__group__help__add_commands() {
-    local commands; commands=()
-    _describe -t commands 'pueue group help add commands' commands "$@"
-}
 (( $+functions[_pueue__group__help__help_commands] )) ||
 _pueue__group__help__help_commands() {
     local commands; commands=()
     _describe -t commands 'pueue group help help commands' commands "$@"
-}
-(( $+functions[_pueue__group__help__remove_commands] )) ||
-_pueue__group__help__remove_commands() {
-    local commands; commands=()
-    _describe -t commands 'pueue group help remove commands' commands "$@"
-}
-(( $+functions[_pueue__group__remove_commands] )) ||
-_pueue__group__remove_commands() {
-    local commands; commands=()
-    _describe -t commands 'pueue group remove commands' commands "$@"
 }
 (( $+functions[_pueue__help_commands] )) ||
 _pueue__help_commands() {
@@ -617,59 +655,6 @@ _pueue__help_commands() {
     )
     _describe -t commands 'pueue help commands' commands "$@"
 }
-(( $+functions[_pueue__help__add_commands] )) ||
-_pueue__help__add_commands() {
-    local commands; commands=()
-    _describe -t commands 'pueue help add commands' commands "$@"
-}
-(( $+functions[_pueue__help__clean_commands] )) ||
-_pueue__help__clean_commands() {
-    local commands; commands=()
-    _describe -t commands 'pueue help clean commands' commands "$@"
-}
-(( $+functions[_pueue__help__completions_commands] )) ||
-_pueue__help__completions_commands() {
-    local commands; commands=()
-    _describe -t commands 'pueue help completions commands' commands "$@"
-}
-(( $+functions[_pueue__help__edit_commands] )) ||
-_pueue__help__edit_commands() {
-    local commands; commands=()
-    _describe -t commands 'pueue help edit commands' commands "$@"
-}
-(( $+functions[_pueue__help__enqueue_commands] )) ||
-_pueue__help__enqueue_commands() {
-    local commands; commands=()
-    _describe -t commands 'pueue help enqueue commands' commands "$@"
-}
-(( $+functions[_pueue__help__follow_commands] )) ||
-_pueue__help__follow_commands() {
-    local commands; commands=()
-    _describe -t commands 'pueue help follow commands' commands "$@"
-}
-(( $+functions[_pueue__help__format-status_commands] )) ||
-_pueue__help__format-status_commands() {
-    local commands; commands=()
-    _describe -t commands 'pueue help format-status commands' commands "$@"
-}
-(( $+functions[_pueue__help__group_commands] )) ||
-_pueue__help__group_commands() {
-    local commands; commands=(
-'add:Add a group by name' \
-'remove:Remove a group by name. This will move all tasks in this group to the default group!' \
-    )
-    _describe -t commands 'pueue help group commands' commands "$@"
-}
-(( $+functions[_pueue__help__group__add_commands] )) ||
-_pueue__help__group__add_commands() {
-    local commands; commands=()
-    _describe -t commands 'pueue help group add commands' commands "$@"
-}
-(( $+functions[_pueue__help__group__remove_commands] )) ||
-_pueue__help__group__remove_commands() {
-    local commands; commands=()
-    _describe -t commands 'pueue help group remove commands' commands "$@"
-}
 (( $+functions[_pueue__help__help_commands] )) ||
 _pueue__help__help_commands() {
     local commands; commands=()
@@ -680,135 +665,150 @@ _pueue__help__kill_commands() {
     local commands; commands=()
     _describe -t commands 'pueue help kill commands' commands "$@"
 }
-(( $+functions[_pueue__help__log_commands] )) ||
-_pueue__help__log_commands() {
-    local commands; commands=()
-    _describe -t commands 'pueue help log commands' commands "$@"
-}
-(( $+functions[_pueue__help__parallel_commands] )) ||
-_pueue__help__parallel_commands() {
-    local commands; commands=()
-    _describe -t commands 'pueue help parallel commands' commands "$@"
-}
-(( $+functions[_pueue__help__pause_commands] )) ||
-_pueue__help__pause_commands() {
-    local commands; commands=()
-    _describe -t commands 'pueue help pause commands' commands "$@"
-}
-(( $+functions[_pueue__help__remove_commands] )) ||
-_pueue__help__remove_commands() {
-    local commands; commands=()
-    _describe -t commands 'pueue help remove commands' commands "$@"
-}
-(( $+functions[_pueue__help__reset_commands] )) ||
-_pueue__help__reset_commands() {
-    local commands; commands=()
-    _describe -t commands 'pueue help reset commands' commands "$@"
-}
-(( $+functions[_pueue__help__restart_commands] )) ||
-_pueue__help__restart_commands() {
-    local commands; commands=()
-    _describe -t commands 'pueue help restart commands' commands "$@"
-}
-(( $+functions[_pueue__help__send_commands] )) ||
-_pueue__help__send_commands() {
-    local commands; commands=()
-    _describe -t commands 'pueue help send commands' commands "$@"
-}
-(( $+functions[_pueue__help__shutdown_commands] )) ||
-_pueue__help__shutdown_commands() {
-    local commands; commands=()
-    _describe -t commands 'pueue help shutdown commands' commands "$@"
-}
-(( $+functions[_pueue__help__start_commands] )) ||
-_pueue__help__start_commands() {
-    local commands; commands=()
-    _describe -t commands 'pueue help start commands' commands "$@"
-}
-(( $+functions[_pueue__help__stash_commands] )) ||
-_pueue__help__stash_commands() {
-    local commands; commands=()
-    _describe -t commands 'pueue help stash commands' commands "$@"
-}
-(( $+functions[_pueue__help__status_commands] )) ||
-_pueue__help__status_commands() {
-    local commands; commands=()
-    _describe -t commands 'pueue help status commands' commands "$@"
-}
-(( $+functions[_pueue__help__switch_commands] )) ||
-_pueue__help__switch_commands() {
-    local commands; commands=()
-    _describe -t commands 'pueue help switch commands' commands "$@"
-}
-(( $+functions[_pueue__help__wait_commands] )) ||
-_pueue__help__wait_commands() {
-    local commands; commands=()
-    _describe -t commands 'pueue help wait commands' commands "$@"
-}
 (( $+functions[_pueue__kill_commands] )) ||
 _pueue__kill_commands() {
     local commands; commands=()
     _describe -t commands 'pueue kill commands' commands "$@"
+}
+(( $+functions[_pueue__help__log_commands] )) ||
+_pueue__help__log_commands() {
+    local commands; commands=()
+    _describe -t commands 'pueue help log commands' commands "$@"
 }
 (( $+functions[_pueue__log_commands] )) ||
 _pueue__log_commands() {
     local commands; commands=()
     _describe -t commands 'pueue log commands' commands "$@"
 }
+(( $+functions[_pueue__help__parallel_commands] )) ||
+_pueue__help__parallel_commands() {
+    local commands; commands=()
+    _describe -t commands 'pueue help parallel commands' commands "$@"
+}
 (( $+functions[_pueue__parallel_commands] )) ||
 _pueue__parallel_commands() {
     local commands; commands=()
     _describe -t commands 'pueue parallel commands' commands "$@"
+}
+(( $+functions[_pueue__help__pause_commands] )) ||
+_pueue__help__pause_commands() {
+    local commands; commands=()
+    _describe -t commands 'pueue help pause commands' commands "$@"
 }
 (( $+functions[_pueue__pause_commands] )) ||
 _pueue__pause_commands() {
     local commands; commands=()
     _describe -t commands 'pueue pause commands' commands "$@"
 }
+(( $+functions[_pueue__group__help__remove_commands] )) ||
+_pueue__group__help__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'pueue group help remove commands' commands "$@"
+}
+(( $+functions[_pueue__group__remove_commands] )) ||
+_pueue__group__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'pueue group remove commands' commands "$@"
+}
+(( $+functions[_pueue__help__group__remove_commands] )) ||
+_pueue__help__group__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'pueue help group remove commands' commands "$@"
+}
+(( $+functions[_pueue__help__remove_commands] )) ||
+_pueue__help__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'pueue help remove commands' commands "$@"
+}
 (( $+functions[_pueue__remove_commands] )) ||
 _pueue__remove_commands() {
     local commands; commands=()
     _describe -t commands 'pueue remove commands' commands "$@"
+}
+(( $+functions[_pueue__help__reset_commands] )) ||
+_pueue__help__reset_commands() {
+    local commands; commands=()
+    _describe -t commands 'pueue help reset commands' commands "$@"
 }
 (( $+functions[_pueue__reset_commands] )) ||
 _pueue__reset_commands() {
     local commands; commands=()
     _describe -t commands 'pueue reset commands' commands "$@"
 }
+(( $+functions[_pueue__help__restart_commands] )) ||
+_pueue__help__restart_commands() {
+    local commands; commands=()
+    _describe -t commands 'pueue help restart commands' commands "$@"
+}
 (( $+functions[_pueue__restart_commands] )) ||
 _pueue__restart_commands() {
     local commands; commands=()
     _describe -t commands 'pueue restart commands' commands "$@"
+}
+(( $+functions[_pueue__help__send_commands] )) ||
+_pueue__help__send_commands() {
+    local commands; commands=()
+    _describe -t commands 'pueue help send commands' commands "$@"
 }
 (( $+functions[_pueue__send_commands] )) ||
 _pueue__send_commands() {
     local commands; commands=()
     _describe -t commands 'pueue send commands' commands "$@"
 }
+(( $+functions[_pueue__help__shutdown_commands] )) ||
+_pueue__help__shutdown_commands() {
+    local commands; commands=()
+    _describe -t commands 'pueue help shutdown commands' commands "$@"
+}
 (( $+functions[_pueue__shutdown_commands] )) ||
 _pueue__shutdown_commands() {
     local commands; commands=()
     _describe -t commands 'pueue shutdown commands' commands "$@"
+}
+(( $+functions[_pueue__help__start_commands] )) ||
+_pueue__help__start_commands() {
+    local commands; commands=()
+    _describe -t commands 'pueue help start commands' commands "$@"
 }
 (( $+functions[_pueue__start_commands] )) ||
 _pueue__start_commands() {
     local commands; commands=()
     _describe -t commands 'pueue start commands' commands "$@"
 }
+(( $+functions[_pueue__help__stash_commands] )) ||
+_pueue__help__stash_commands() {
+    local commands; commands=()
+    _describe -t commands 'pueue help stash commands' commands "$@"
+}
 (( $+functions[_pueue__stash_commands] )) ||
 _pueue__stash_commands() {
     local commands; commands=()
     _describe -t commands 'pueue stash commands' commands "$@"
+}
+(( $+functions[_pueue__help__status_commands] )) ||
+_pueue__help__status_commands() {
+    local commands; commands=()
+    _describe -t commands 'pueue help status commands' commands "$@"
 }
 (( $+functions[_pueue__status_commands] )) ||
 _pueue__status_commands() {
     local commands; commands=()
     _describe -t commands 'pueue status commands' commands "$@"
 }
+(( $+functions[_pueue__help__switch_commands] )) ||
+_pueue__help__switch_commands() {
+    local commands; commands=()
+    _describe -t commands 'pueue help switch commands' commands "$@"
+}
 (( $+functions[_pueue__switch_commands] )) ||
 _pueue__switch_commands() {
     local commands; commands=()
     _describe -t commands 'pueue switch commands' commands "$@"
+}
+(( $+functions[_pueue__help__wait_commands] )) ||
+_pueue__help__wait_commands() {
+    local commands; commands=()
+    _describe -t commands 'pueue help wait commands' commands "$@"
 }
 (( $+functions[_pueue__wait_commands] )) ||
 _pueue__wait_commands() {
