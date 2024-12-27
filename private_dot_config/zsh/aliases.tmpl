@@ -15,14 +15,14 @@ alias sudo="doas"
 {{- end -}}
 {{- end }}
 
-alias cat=bat
+alias cat="bat"
 alias ls="eza --color=auto --group-directories-first -F"
 alias l="ls --smart-group -lahM@"
-alias grep="grep --color=auto"
-alias open=xdg-open
+alias grep="command grep --color=auto"
 alias ip='command ip --color=auto'
+alias open="xdg-open"
+alias rm="trash"
 alias ca="cargo"
-alias tma='tmux new-session -t {{ .icon }}'
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 alias lzg="lazygit"
 alias dlzg="lazygit --path {{ .chezmoi.sourceDir }}"
@@ -31,6 +31,7 @@ alias cdtemp='cd `mktemp -d`'
 alias ptemp='pushd `mktemp -d`'
 alias zenv="source ${ZEPHYR_WEST}/bin/activate"
 alias zzenv="export ZEPHYR_BASE="${ZEPHYR_WORKSPACE}/zephyr" && zenv"
+alias ci-container="docker container run --rm -it -v$(pwd):$(pwd) -w$(pwd) --init"
 
 {{- if not .isHeadless }}
 alias sudo-disp="xhost + local:"

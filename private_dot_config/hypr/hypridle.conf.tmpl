@@ -3,7 +3,49 @@ general {
     before_sleep_cmd = loginctl lock-session
     after_sleep_cmd = hyprctl dispatch dpms on
 }
+{{ if eq .chezmoi.hostname "ThinkBookArch" }}
+listener {
+    timeout = 120
+    on-timeout = brightnessctl -s set 10
+    on-resume = brightnessctl -r
+}
 
-{{- template "hypridle" . }}
+listener {
+    timeout = 300
+    on-timeout = loginctl lock-session
+}
 
+listener {
+    timeout = 330
+    on-timeout = hyprctl dispatch dpms off
+    on-resume = hyprctl dispatch dpms on
+}
+
+listener {
+    timeout = 900
+    on-timeout = systemctl suspend
+}
+{{ else if eq .chezmoi.hostname "B650Arch" }}
+listener {
+    timeout = 300
+    on-timeout = loginctl lock-session
+}
+
+listener {
+    timeout = 600
+    on-timeout = hyprctl dispatch dpms off
+    on-resume = hyprctl dispatch dpms on
+}
+{{ else if eq .chezmoi.hostname "ant" }}
+listener {
+    timeout = 210
+    on-timeout = loginctl lock-session
+}
+
+listener {
+    timeout = 600
+    on-timeout = hyprctl dispatch dpms off
+    on-resume = hyprctl dispatch dpms on
+}
+{{- end -}}
 # vim: ft=hyprlang
