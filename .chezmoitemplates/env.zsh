@@ -26,6 +26,7 @@ export GOHOME="$COMPILERS_BASE/go"
 
 # Python stuff
 export WORKON_HOME="$XDG_DATA_HOME/virtualenv"
+export UV_LINK_MODE="clone"
 
 # Rust stuff
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
