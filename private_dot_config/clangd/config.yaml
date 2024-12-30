@@ -7,10 +7,12 @@ CompileFlags:
     - -fno-printf-return-value
     - -fno-reorder-functions
     - -fstrict-volatile-bitfields
+    - -mapcs
     - -mfp16-format=ieee
     - -mgeneral-regs-only
     - -mindirect-branch*
     - -mno-fdpic
+    - -mno-sched-prolog
     - -mno-thumb-interwork
     - -mpreferred-stack-boundary*
     - -mrecord-mcount
