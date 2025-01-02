@@ -57,7 +57,7 @@ function kernel_nconfig () {
 {{- end }}
 
 function disasm() {
-    gdb-multiarch --batch --nx -ex "disas/r ${2}" "$1"
+    gdb --batch --nx -ex "disas/r ${2}" "$1"
 }
 
 function _disasm_complete() {

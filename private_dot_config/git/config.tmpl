@@ -1,7 +1,7 @@
 [core]
     autocrlf = input
-    excludeFile = ~/.config/git/ignore
-    attributesfile = ~/.config/git/attributes
+    excludeFile = {{ .chezmoi.homeDir }}/.config/git/ignore
+    attributesfile = {{ .chezmoi.homeDir }}/.config/git/attributes
 {{- if lookPath "delta" }}
     pager = delta
 {{- end }}
@@ -52,6 +52,11 @@
     submoduleSummary = -1
 [submodule]
     fetchJobs = 0
+
+{{- if stat (joinPath .chezmoi.homeDir ".config/git/cookies") }}
+[http]
+    cookiefile = {{ .chezmoi.homeDir }}/.config/git/cookies
+{{- end }}
 
 [url "git@github.com:"]
     insteadOf = gh:
