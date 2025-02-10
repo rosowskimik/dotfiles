@@ -18,6 +18,9 @@ export CMAKE_GENERATOR="Ninja"
 export COMPILERS_BASE="$XDG_OPT_HOME/compilers"
 export CROSS_BASE="$COMPILERS_BASE/cross"
 
+# FPGA stuff
+export OSS_CAD="$XDG_OPT_HOME/oss-cad-suite"
+
 # Go stuff
 export GOPATH="$XDG_DATA_HOME/go"
 {{- if eq .chezmoi.osRelease.id "debian" }}
@@ -83,6 +86,7 @@ append_path "$CARGO_HOME/bin"
 append_path "$GOPATH/bin"
 append_path "$ZIG_HOME"
 
+append_path "$OSS_CAD/bin"
 append_path /opt/renode_portable
 
 export PATH
