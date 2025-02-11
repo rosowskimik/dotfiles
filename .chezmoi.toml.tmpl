@@ -14,7 +14,7 @@
 {{-     $chassisType = "desktop" }}
 {{-   end }}
 {{- else if and (eq .chezmoi.os "linux") (lookPath "hostnamectl") }}
-{{-   $chassisType = (output "hostnamectl" "--json=short" | mustFromJson).Chassis }}
+{{-   $chassisType = (or (output "hostnamectl" "--json=short" | mustFromJson).Chassis "desktop" ) }}
 {{- else if (eq .chezmoi.os "windows") }}
 {{-   $chassisType = (output "powershell.exe" "-noprofile" "-command" "if (Get-WmiObject -Class win32_battery -ComputerName localhost) { echo laptop } else { echo desktop }") }}
 {{- end -}}
@@ -37,7 +37,6 @@
 	isContainer = {{ $isContainer }}
 	isDesktop = {{ eq $chassisType "desktop" }}
 	isNvidia = {{ $isNvidia }}
-
 
 	email = {{ $email | quote }}
 	nproc = {{ output "nproc" }}
