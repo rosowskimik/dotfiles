@@ -1,7 +1,7 @@
 {{ if not .isHeadless -}}
 # Universal Wayland Session Manager
 if uwsm check may-start > /dev/null; then
-	exec uwsm start -S hyprland.desktop
+	exec uwsm start hyprland.desktop
 fi
 {{ end -}}
 
