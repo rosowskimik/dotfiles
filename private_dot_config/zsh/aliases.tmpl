@@ -28,7 +28,7 @@ alias lzg="lazygit"
 alias dlzg="lazygit --path {{ .chezmoi.sourceDir }}"
 alias nlzg="lazygit --path $XDG_CONFIG_HOME/nvim"
 alias cdtemp='cd `mktemp -d`'
-alias ptemp='pushd `mktemp -d`'
+alias yd='y .'
 alias zenv="source ${ZEPHYR_WEST}/bin/activate"
 alias zzenv="export ZEPHYR_BASE="${ZEPHYR_WORKSPACE}/zephyr" && zenv"
 alias docker-ci='docker container run --rm -it -v`pwd`:`pwd` -v{{ .chezmoi.homeDir }}/.ssh:/home/builder/.ssh:ro -w`pwd` --init'
