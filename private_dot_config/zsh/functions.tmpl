@@ -1,68 +1,62 @@
 # creates an alias and precedes the command with
 # sudo if $EUID is not zero.
-function salias () {
+function salias() {
     emulate -L zsh
-    local only=0 ; local multi=0
+    local only=0
+    local multi=0
     local key val
     while getopts ":hao" opt; do
         case $opt in
-            o) only=1 ;;
-            a) multi=1 ;;
-            h)
-                printf 'usage: salias [-hoa] <alias-expression>\n'
-                printf '  -h      shows this help text.\n'
-                printf '  -a      replace '\'' ; '\'' sequences with '\'' ; sudo '\''.\n'
-                printf '          be careful using this option.\n'
-                printf '  -o      only sets an alias if a preceding sudo would be needed.\n'
-                return 0
-                ;;
-            *) salias -h >&2; return 1 ;;
+        o) only=1 ;;
+        a) multi=1 ;;
+        h)
+            printf 'usage: salias [-hoa] <alias-expression>\n'
+            printf '  -h      shows this help text.\n'
+            printf '  -a      replace '\'' ; '\'' sequences with '\'' ; sudo '\''.\n'
+            printf '          be careful using this option.\n'
+            printf '  -o      only sets an alias if a preceding sudo would be needed.\n'
+            return 0
+            ;;
+        *)
+            salias -h >&2
+            return 1
+            ;;
         esac
     done
-    shift "$((OPTIND-1))"
+    shift "$((OPTIND - 1))"
 
-    if (( ${#argv} > 1 )) ; then
+    if ((${#argv} > 1)); then
         printf 'Too many arguments %s\n' "${#argv}"
         return 1
     fi
 
-    key="${1%%\=*}" ;  val="${1#*\=}"
-    if (( EUID == 0 )) && (( only == 0 )); then
+    key="${1%%\=*}"
+    val="${1#*\=}"
+    if ((EUID == 0)) && ((only == 0)); then
         alias -- "${key}=${val}"
-    elif (( EUID > 0 )) ; then
-        (( multi > 0 )) && val="${val// ; / ; sudo }"
+    elif ((EUID > 0)); then
+        ((multi > 0)) && val="${val// ; / ; sudo }"
         alias -- "${key}=sudo ${val}"
     fi
 
     return 0
 }
 
-{{- if eq .chezmoi.osRelease.id "gentoo" }}
-function kernel_nconfig () {
-    ebuild_dir="/var/db/repos/gentoo/sys-kernel/gentoo-kernel"
-    savedconfig_dir="/etc/portage/savedconfig/sys-kernel"
-
-    current_version=$(uname -a | cut -d' ' -f3 | cut -d'-' -f1)
-    pick=${$(ls ${ebuild_dir}/*.ebuild | fzf -q ${current_version} | cut -d'/' -f8)%".ebuild"}
-
-    modprep_dir=$(doas ebuild ${ebuild_dir}/${pick}.ebuild configure | tee /dev/stderr | grep -m1 Leaving | cut -d' ' -f4 | tr -d "'")
-
-    doas make -C ${modprep_dir} nconfig
-    doas cp ${modprep_dir}/.config ${savedconfig_dir}/${pick}
-
-    delta ${savedconfig_dir}/gentoo-kernel ${savedconfig_dir}/${pick}
-
-    printf "Config setup. Now run\ndoas emerge -av sys-kernel/gentoo-kernel\nto rebuild kernel"
+function y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+        builtin cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
 }
-{{- end }}
 
 function disasm() {
     gdb --batch --nx -ex "disas/r ${2}" "$1"
 }
 
 function _disasm_complete() {
-    if (( ${#words[@]} < 3 ))
-    then
+    if ((${#words[@]} < 3)); then
         _files
     else
         compadd $(readelf -sW ${words[2]} | awk '$4 == "FUNC"' | grep -oE "[_a-zA-Z][_a-zA-Z0-9]*$")
@@ -78,4 +72,3 @@ fi
 # Local variables:
 # mode: sh
 # End:
-
