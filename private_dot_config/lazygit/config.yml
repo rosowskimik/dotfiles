@@ -4,6 +4,7 @@ git:
     pager: delta --dark --paging=never
   commit:
     signOff: true
+  autoFetch: false
 gui:
   language: "en"
   border: single

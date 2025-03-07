@@ -1,5 +1,8 @@
 CompileFlags:
   Remove:
+    - -march=*
+    - -mabi=*
+    - -mcpu=*
     - -fconserve-stack
     - -fmin-function-alignment*
     - -fno-allow-store-data-races
