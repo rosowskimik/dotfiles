@@ -21,7 +21,7 @@ alias l="ls --smart-group -lahM@"
 alias grep="command grep --color=auto"
 alias ip='command ip --color=auto'
 alias open="xdg-open"
-alias rm="trash"
+alias rma="trash"
 alias ca="cargo"
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 alias lzg="lazygit"
@@ -37,3 +37,5 @@ alias docker-ci='docker container run --rm -it -v`pwd`:`pwd` -v{{ .chezmoi.homeD
 {{- if not .isHeadless }}
 alias sudo-disp="xhost + local:"
 {{ end }}
+
+# vim:ft=zsh

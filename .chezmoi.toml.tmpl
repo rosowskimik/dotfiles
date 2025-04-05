@@ -1,6 +1,7 @@
 {{- $isHeadless := promptBoolOnce . "isHeadless" "Is headless machine" -}}
 {{- $isContainer := promptBoolOnce . "isContainer" "Inside a container" -}}
 {{- $isNvidia := promptBoolOnce . "isNvidia" "Uses Nvidia" -}}
+{{- $isBtrfs := promptBoolOnce . "isBtrfs" "Uses Btrfs for home" -}}
 {{- $email := promptStringOnce . "email" "Email address" -}}
 
 {{- $chassisType := "desktop" }}
@@ -37,6 +38,7 @@
 	isContainer = {{ $isContainer }}
 	isDesktop = {{ eq $chassisType "desktop" }}
 	isNvidia = {{ $isNvidia }}
+	isBtrfs = {{ $isBtrfs }}
 
 	email = {{ $email | quote }}
 	nproc = {{ output "nproc" }}
@@ -52,6 +54,14 @@
 
 	battery = {{ $battery | quote }}
 
+	# Cursor
+	{{- if eq .chezmoi.hostname "ThinkBookArch" }}
+	cursor = "phinger-cursors-dark"
+	{{- else }}
+	cursor = "bibata-modern-classic"
+	{{- end }}
+
+	# Wallpaper
 	{{- if eq .chezmoi.hostname "ThinkBookArch" }}
 	wall = "/home/{{- .chezmoi.username -}}/Pictures/Wallpapers/wallhaven-rddgwm.jpg"
 	lock = "/home/{{- .chezmoi.username -}}/Pictures/Wallpapers/wallhaven-3lyrvy.png"
@@ -65,3 +75,5 @@
 	wall = "/home/{{- .chezmoi.username -}}/Pictures/Wallpapers/wallhaven-rddgwm.jpg"
 	lock = "/home/{{- .chezmoi.username -}}/Pictures/Wallpapers/wallhaven-3lyrvy.png"
 	{{- end }}
+
+# vim: ft=toml

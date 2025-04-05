@@ -42,6 +42,48 @@ function salias() {
     return 0
 }
 
+function prepend_path() {
+    if test -z "$1"; then
+        target="$PWD"
+    else
+        target=$(realpath "$1")
+    fi
+
+    if ! test -d "$target"; then
+        echo "$target not found"
+        return 1
+    fi
+
+    case ":$PATH:" in
+    *:"$target":*) ;;
+    *)
+        PATH="${target}${PATH:+:$PATH}"
+        ;;
+    esac
+    export PATH
+}
+
+function append_path() {
+    if test -z "$1"; then
+        target="$PWD"
+    else
+        target=$(realpath "$1")
+    fi
+
+    if ! test -d "$target"; then
+        echo "$target not found"
+        return 1
+    fi
+
+    case ":$PATH:" in
+    *:"$target":*) ;;
+    *)
+        PATH="${PATH:+$PATH:}${target}"
+        ;;
+    esac
+    export PATH
+}
+
 function y() {
     local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
     yazi "$@" --cwd-file="$tmp"
