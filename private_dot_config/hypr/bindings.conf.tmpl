@@ -1,7 +1,7 @@
 $mainMod = SUPER
 
 # Exec
-bind = $mainMod,        return,     exec, alacritty
+bind = $mainMod,        return,     exec, kitty -1
 bind = $mainMod SHIFT,  return,     exec, nemo
 {{- if eq .chezmoi.hostname "ant" }}
 bind = $mainMod,        B,          exec, firefox
@@ -69,7 +69,7 @@ bind = CTRL SHIFT, l, movewindow, mon:r
 bind = CTRL SHIFT, k, movewindow, mon:u
 bind = CTRL SHIFT, j, movewindow, mon:d
 
-# Resize 
+# Resize
 binde = $mainMod SHIFT, h, resizeactive, -15 0
 binde = $mainMod SHIFT, l, resizeactive, 15 0
 binde = $mainMod SHIFT, k, resizeactive, 0 -15
