@@ -27,6 +27,7 @@ alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 alias lzg="lazygit"
 alias dlzg="lazygit --path {{ .chezmoi.sourceDir }}"
 alias nlzg="lazygit --path $XDG_CONFIG_HOME/nvim"
+alias dcm='chezmoi git -- commit -m "$(chezmoi generate git-commit-message)"'
 alias cdtemp='cd `mktemp -d`'
 alias yd='y .'
 alias ssho="ssh -o UserKnownHostsFile /dev/null"
