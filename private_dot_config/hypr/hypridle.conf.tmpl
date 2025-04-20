@@ -27,12 +27,12 @@ listener {
 }
 {{ else if eq .chezmoi.hostname "B650Arch" }}
 listener {
-    timeout = 300
+    timeout = 900
     on-timeout = loginctl lock-session
 }
 
 listener {
-    timeout = 600
+    timeout = 1800
     on-timeout = hyprctl dispatch dpms off
     on-resume = hyprctl dispatch dpms on
 }

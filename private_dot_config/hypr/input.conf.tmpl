@@ -10,7 +10,7 @@ input {
     {{- if eq .chezmoi.hostname "ant" }}
     sensitivity = 1.05
     {{- else }}
-    sensitivity = 1.00
+    sensitivity = 0.6
     {{- end }}
 
     repeat_rate = 35
