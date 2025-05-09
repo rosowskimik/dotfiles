@@ -34,6 +34,7 @@ alias ssho="ssh -o UserKnownHostsFile /dev/null"
 alias zenv="source ${ZEPHYR_WEST}/bin/activate"
 alias zzenv="export ZEPHYR_BASE="${ZEPHYR_WORKSPACE}/zephyr" && zenv"
 alias docker-ci='docker container run --rm -it -v`pwd`:`pwd` -v{{ .chezmoi.homeDir }}/.ssh:/home/builder/.ssh:ro -w`pwd` --init'
+alias ssho='ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 
 {{- if not .isHeadless }}
 alias sudo-disp="xhost + local:"
