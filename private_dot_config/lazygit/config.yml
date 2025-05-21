@@ -1,13 +1,18 @@
 git:
+  autoFetch: false
+  autoStageResolvedConflicts: false
+  commit:
+    signOff: true
+  commitPrefix:
+    - pattern: "^(\\d+)-.*$"
+      replace: '[#$1] '
   paging:
     colorArg: always
     pager: delta --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
-  commit:
-    signOff: true
-  autoFetch: false
 gui:
   language: "en"
   border: single
+  nerdFontsVersion: 3
 os:
   editPreset: "nvim"
 keybinding:
