@@ -2,9 +2,6 @@
     autocrlf = input
     excludeFile = {{ .chezmoi.homeDir }}/.config/git/ignore
     attributesfile = {{ .chezmoi.homeDir }}/.config/git/attributes
-{{- if lookPath "delta" }}
-    pager = delta
-{{- end }}
 [user]
     name = Mikołaj Rosowski
     email = {{ .email }}
@@ -25,14 +22,12 @@
     compactionHeuristic = true
     colorMoved = default
     submodule = log
-{{- if lookPath "difft" }}
-    tool = difftastic
-{{- end }}
-
 [advice]
     addIgnoredFile = false
 [commit]
     verbose = true
+[diff]
+    colorMoved = default
 [difftool]
     prompt = false
 [help]
@@ -40,8 +35,6 @@
 [merge]
     conflictStyle = zdiff3
     tool = nvimdiff
-[interactive]
-    diffFilter = delta --color-only --features=interactive
 [pager]
     difftool = true
 [rebase]
@@ -72,34 +65,16 @@
     helper = !/usr/bin/gh auth git-credential
 {{- end }}
 
-{{- if lookPath "git-lfs" }}
-[filter "lfs"]
-    clean = git-lfs clean -- %f
-    smudge = git-lfs smudge -- %f
-    process = git-lfs filter-process
-    required = true
+[include]
+{{- if lookPath "delta" }}
+    path = {{ .chezmoi.homeDir }}/.config/git/delta.gitconfig
 {{- end }}
 
-{{- if lookPath "delta" }}
-[delta]
-    features = side-by-side line-numbers decorations
-    navigate = true
-    light = false
-[delta "decorations"]
-    commit-decoration-style = bold yellow box ul
-    file-style = bold yellow ul
-    file-decoration-style = none
-    hunk-header-decoration-style = cyan box ul
+{{- if lookPath "git-lfs" }}
+    path = {{ .chezmoi.homeDir }}/.config/git/lfs.gitconfig
 {{- end }}
 
 {{- if lookPath "difft" }}
-[difftool "difftastic"]
-    cmd = difft "$MERGED" "$LOCAL" "abcdef1" "100644" "$REMOTE" "abcdef2" "100644"
-{{- end }}
-
-{{- if lookPath "mergiraf" }}
-[merge "mergiraf"]
-    name = mergiraf
-    driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P
+    path = {{ .chezmoi.homeDir }}/.config/git/difftastic.gitconfig
 {{- end }}
 
