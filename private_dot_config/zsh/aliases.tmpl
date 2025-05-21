@@ -15,6 +15,8 @@ alias sudo="doas"
 {{- end -}}
 {{- end }}
 
+alias hat="bat -plhelp"
+alias batp="bat"
 alias cat="bat"
 alias ls="eza --color=auto --group-directories-first -F"
 alias l="ls --smart-group -lgahM"
@@ -35,6 +37,7 @@ alias zenv="source ${ZEPHYR_WEST}/bin/activate"
 alias zzenv="export ZEPHYR_BASE="${ZEPHYR_WORKSPACE}/zephyr" && zenv"
 alias docker-ci='docker container run --rm -it -v`pwd`:`pwd` -v{{ .chezmoi.homeDir }}/.ssh:/home/builder/.ssh:ro -w`pwd` --init'
 alias ssho='ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
+alias scpo='scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 
 {{- if not .isHeadless }}
 alias sudo-disp="xhost + local:"

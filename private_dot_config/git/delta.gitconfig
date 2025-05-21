@@ -1,0 +1,16 @@
+[core]
+    pager = delta
+[interactive]
+    diffFilter = delta --color-only --features=interactive
+[delta]
+    features = side-by-side decorations zebra-dark
+    hyperlinks = true
+    navigate = true
+    true-color = always
+    light = false
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
+    hunk-header-decoration-style = cyan box ul
+

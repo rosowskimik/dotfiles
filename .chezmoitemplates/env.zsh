@@ -11,6 +11,12 @@ export APPTAINER_CACHEDIR="$XDG_CACHE_HOME/apptainer"
 export APPTAINER_CONTAINERS="$XDG_SRC_HOME/apptainer"
 export APPTAINER_BINDPATH="${WAYLAND_DISPLAY:+${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY},}$SSH_AUTH_SOCK"
 
+# Bat stuff
+export BAT_STYLE="-numbers"
+
+# Ccache stuff
+export CCACHE_SLOPPINESS="locale,time_macros"
+
 # Cmake stuff
 export CMAKE_EXPORT_COMPILE_COMMANDS="Yes"
 export CMAKE_GENERATOR="Ninja"
@@ -47,12 +53,9 @@ export ZEPHYR_SDK_INSTALL_DIR="$ZEPHYR_WORKSPACE/sdks"
 
 # Defaults
 export EDITOR=nvim
-{{- if eq .chezmoi.osRelease.id "debian" }}
-export PAGER="batcat -p"
-{{- else if eq .chezmoi.osRelease.id "gentoo" }}
-export PAGER="less"
-{{- else }}
-export PAGER="bat -p"
+export PAGER=less
+{{- if lookPath "bat" }}
+export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
 {{- end }}
 
 # Cleanup
