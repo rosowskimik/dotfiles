@@ -15,6 +15,8 @@ alias sudo="doas"
 {{- end -}}
 {{- end }}
 
+alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
+
 alias hat="bat -plhelp"
 alias batp="bat"
 alias cat="bat"
