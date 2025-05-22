@@ -15,6 +15,7 @@ windowrulev2 = float, class:^(steam)$, title:^(Friends List)$
 windowrulev2 = float, class:^(kicad)$, title:^(Assign Footprints)$
 windowrulev2 = float, class:^(kicad)$, title:^(Footprint:.*)$
 windowrulev2 = float, class:^(kicad)$, title:^(3D Viewer)$
+windowrulev2 = float, class:^(file-png)$
 
 windowrulev2 = pin, title:^(Picture-in-Picture)$
 
@@ -31,8 +32,8 @@ windowrulev2 = rounding 0, floating:0, onworkspace:f[1]
 {{- if eq .chezmoi.hostname "ant" }}
 workspace = 1, on-created-empty:[silent] firefox, monitor:DP-2, default:true
 workspace = 2, on-created-empty:[silent] kitty, monitor:HDMI-A-1, default:true
-workspace = 8, on-created-empty:[silent] slack
-workspace = 9, on-created-empty:[silent] thunderbird
+workspace = 8, on-created-empty:[silent] slack, monitor:DP-2
+workspace = 9, on-created-empty:[silent] thunderbird, monitor:HDMI-A-1
 {{- end }}
 
 # vim: ft=hyprlang
