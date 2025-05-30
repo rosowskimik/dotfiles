@@ -84,6 +84,21 @@ function append_path() {
     export PATH
 }
 
+function lzg() {
+    export LAZYGIT_NEW_DIR_FILE=$XDG_STATE_HOME/lazygit/newdir
+
+    cwd="$(pwd)"
+    lazygit "$@"
+
+    if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
+        newdir="$(cat $LAZYGIT_NEW_DIR_FILE)"
+        if [ $cwd != $newdir ]; then
+            cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
+        fi
+        rm -f $LAZYGIT_NEW_DIR_FILE >/dev/null
+    fi
+}
+
 function y() {
     local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
     yazi "$@" --cwd-file="$tmp"
