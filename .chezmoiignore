@@ -21,4 +21,5 @@
 
 {{- if ne .chezmoi.osRelease.id "arch" }}
 .config/paru
+.config/pacman
 {{- end }}
