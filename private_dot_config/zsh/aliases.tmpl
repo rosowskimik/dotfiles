@@ -28,8 +28,9 @@ alias rma="trash"
 alias ca="cargo"
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 alias dlzg="lazygit --path {{ .chezmoi.sourceDir }}"
-alias nlzg="lazygit --path $XDG_CONFIG_HOME/nvim"
-alias dcm='chezmoi git -- commit -m "$(chezmoi generate git-commit-message)"'
+alias dcommit='chezmoi git -- commit -m "$(chezmoi generate git-commit-message)"'
+alias dpush="chezmoi git -- push"
+alias dotfiles="dlzg && dcommit && dpush"
 alias cdtemp='cd `mktemp -d`'
 alias yd='y .'
 alias ssho="ssh -o UserKnownHostsFile /dev/null"
