@@ -93,7 +93,7 @@ function lzg() {
     if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
         newdir="$(cat $LAZYGIT_NEW_DIR_FILE)"
         if [ $cwd != $newdir ]; then
-            cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
+            cd "$newdir"
         fi
         rm -f $LAZYGIT_NEW_DIR_FILE >/dev/null
     fi
