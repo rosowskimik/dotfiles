@@ -1,16 +1,9 @@
-{{ if not .isHeadless -}}
-# Universal Wayland Session Manager
-if uwsm check may-start > /dev/null; then
-	exec uwsm start hyprland.desktop
-fi
-{{ end -}}
+fpath=($ZDOTDIR/completions $fpath)
 
 autoload -Uz compinit promptinit
 
 compinit
 promptinit
-
-fpath=($ZDOTDIR/completions $fpath)
 
 zstyle ':completion:*' menu select gain-privileges 1
 
