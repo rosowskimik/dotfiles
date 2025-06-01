@@ -41,8 +41,4 @@ alias docker-ci='docker container run --rm -it -v`pwd`:`pwd` -v{{ .chezmoi.homeD
 alias ssho='ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 alias scpo='scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 
-{{- if not .isHeadless }}
-alias sudo-disp="xhost + local:"
-{{ end }}
-
 # vim:ft=zsh

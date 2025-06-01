@@ -9,6 +9,8 @@ input {
     accel_profile = flat
     {{- if eq .chezmoi.hostname "ant" }}
     sensitivity = 1.05
+    {{- else if eq .chezmoi.hostname "ThinkBookArch" }}
+    sensitivity = 1.0
     {{- else }}
     sensitivity = 0.6
     {{- end }}
