@@ -31,6 +31,7 @@ alias dlzg="lazygit --path {{ .chezmoi.sourceDir }}"
 alias dcommit='chezmoi git -- commit -m "$(chezmoi generate git-commit-message)"'
 alias dpush="chezmoi git -- push"
 alias dotfiles="dlzg && dcommit && dpush"
+alias lzg="lazygit"
 alias nlzg="lazygit --path $XDG_CONFIG_HOME/nvim"
 alias cdtemp='cd `mktemp -d`'
 alias yd='y .'

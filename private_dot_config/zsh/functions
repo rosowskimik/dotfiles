@@ -84,7 +84,7 @@ function append_path() {
     export PATH
 }
 
-function lzg() {
+function clzg() {
     export LAZYGIT_NEW_DIR_FILE=$XDG_STATE_HOME/lazygit/newdir
 
     cwd="$(pwd)"
