@@ -1,0 +1,9 @@
+#compdef leases
+
+compdef _leases leases
+
+_leases() {
+  local -a interfaces
+  interfaces=(${(f)"$(networkctl list --no-legend --no-pager | awk '{print $2}')"})
+  _describe 'network interface' interfaces
+}
