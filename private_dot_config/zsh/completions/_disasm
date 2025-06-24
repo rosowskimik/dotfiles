@@ -1,0 +1,11 @@
+#compdef disasm
+
+compdef _disasm disasm
+
+_disasm() {
+    if ((${#words[@]} < 3)); then
+        _files
+    else
+        compadd $(readelf -sW ${words[2]} | awk '$4 == "FUNC"' | grep -oE "[_a-zA-Z][_a-zA-Z0-9]*$")
+    fi
+}

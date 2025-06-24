@@ -108,21 +108,37 @@ function y() {
     rm -f -- "$tmp"
 }
 
+function leases() {
+    # Check if an interface name was provided as an argument.
+    if [[ -z $1 ]]; then
+        # Print usage instructions to standard error and exit.
+        echo "Usage: show-leases <interface>" >&2
+        return 1
+    fi
+
+    # Use a local variable for the interface name for good practice.
+    local interface="$1"
+    networkctl --json=short status "$interface" | jq -r '
+    def bytehex:
+      [(./16 | floor), .%16] | map(if . < 10 then 48 + . else . + 55 end) | implode;
+    (.DHCPServer.Leases // []) as $leases |
+    if ($leases | length > 0) then
+      (
+        $leases |
+        map(
+          "Hostname: \(.Hostname)\nMAC: \(.HardwareAddress[:6] | map(bytehex) | join(":"))\nIP: \(.Address | join("."))"
+        ) |
+        join("\n\n")
+      )
+    else
+      "No Leases"
+    end
+  '
+}
+
 function disasm() {
     gdb --batch --nx -ex "disas/r ${2}" "$1"
 }
-
-function _disasm_complete() {
-    if ((${#words[@]} < 3)); then
-        _files
-    else
-        compadd $(readelf -sW ${words[2]} | awk '$4 == "FUNC"' | grep -oE "[_a-zA-Z][_a-zA-Z0-9]*$")
-    fi
-}
-
-if [ -n "$ZSH_VERSION" ]; then
-    compdef _disasm_complete disasm
-fi
 
 ## END OF FILE #################################################################
 # vim:filetype=zsh foldmethod=marker autoindent expandtab shiftwidth=4
