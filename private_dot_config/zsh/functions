@@ -109,14 +109,11 @@ function y() {
 }
 
 function leases() {
-    # Check if an interface name was provided as an argument.
     if [[ -z $1 ]]; then
-        # Print usage instructions to standard error and exit.
         echo "Usage: show-leases <interface>" >&2
         return 1
     fi
 
-    # Use a local variable for the interface name for good practice.
     local interface="$1"
     networkctl --json=short status "$interface" | jq -r '
     def bytehex:
