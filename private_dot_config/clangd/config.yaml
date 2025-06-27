@@ -4,6 +4,7 @@ CompileFlags:
     - -mabi=*
     - -mcpu=*
     - -fconserve-stack
+    - -femit-struct-debug-baseonly
     - -fmin-function-alignment*
     - -fno-allow-store-data-races
     - -fno-ipa-sra
