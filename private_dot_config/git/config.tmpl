@@ -31,7 +31,7 @@
 [help]
     autocorrect = 1
 [merge]
-    conflictStyle = zdiff3
+    conflictStyle = diff3
     tool = nvimdiff
 [pager]
     difftool = true
@@ -74,5 +74,9 @@
 
 {{- if lookPath "difft" }}
     path = {{ .chezmoi.homeDir }}/.config/git/difftastic.gitconfig
+{{- end }}
+
+{{- if lookPath "mergiraf" }}
+    path = {{ .chezmoi.homeDir }}/.config/git/mergiraf.gitconfig
 {{- end }}
 
