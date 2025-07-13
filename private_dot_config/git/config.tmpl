@@ -1,7 +1,7 @@
 [core]
     autocrlf = input
-    excludeFile = {{ .chezmoi.homeDir }}/.config/git/ignore
-    attributesfile = {{ .chezmoi.homeDir }}/.config/git/attributes
+    excludeFile = {{ joinPath .chezmoi.homeDir ".config/git/ignore" }}
+    attributesfile = {{ joinPath .chezmoi.homeDir ".config/git/attributes" }}
 [user]
     name = Mikołaj Rosowski
     email = {{ .email }}
@@ -44,10 +44,12 @@
     submoduleSummary = -1
 [submodule]
     fetchJobs = 0
+[credential]
+    helper = /usr/lib/git-core/git-credential-libsecret
 
 {{- if stat (joinPath .chezmoi.homeDir ".config/git/cookies") }}
 [http]
-    cookiefile = {{ .chezmoi.homeDir }}/.config/git/cookies
+    cookiefile = {{ joinPath .chezmoi.homeDir ".config/git/cookies" }}
 {{- end }}
 
 [url "git@github.com:"]
@@ -64,19 +66,22 @@
 {{- end }}
 
 [include]
+    path = {{ joinPath .chezmoi.homeDir ".config/git/mail.gitconfig" }}
+
 {{- if lookPath "delta" }}
-    path = {{ .chezmoi.homeDir }}/.config/git/delta.gitconfig
+    path = {{ joinPath .chezmoi.homeDir ".config/git/delta.gitconfig" }}
 {{- end }}
 
 {{- if lookPath "git-lfs" }}
-    path = {{ .chezmoi.homeDir }}/.config/git/lfs.gitconfig
+    path = {{ joinPath .chezmoi.homeDir ".config/git/lfs.gitconfig" }}
 {{- end }}
 
 {{- if lookPath "difft" }}
-    path = {{ .chezmoi.homeDir }}/.config/git/difftastic.gitconfig
+    path = {{ joinPath .chezmoi.homeDir ".config/git/difftastic.gitconfig" }}
 {{- end }}
 
 {{- if lookPath "mergiraf" }}
-    path = {{ .chezmoi.homeDir }}/.config/git/mergiraf.gitconfig
+    path = {{ joinPath .chezmoi.homeDir ".config/git/mergiraf.gitconfig" }}
 {{- end }}
 
+; vim: filetype=gitconfig

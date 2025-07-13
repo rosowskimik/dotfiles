@@ -1,0 +1,9 @@
+{{- if eq .chezmoi.hostname "B650Arch" -}}
+[sendemail]
+    smtpserver = smtp.wp.pl
+    smtpuser = {{ .email }}
+    smtpencryption = ssl
+    smtpserverport = 465
+{{ end -}}
+
+; vim: filetype=gitconfig
