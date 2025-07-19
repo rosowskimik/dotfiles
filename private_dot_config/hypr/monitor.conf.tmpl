@@ -1,5 +1,31 @@
-{{- template "monitors" . -}}
+{{- if eq .chezmoi.hostname "ThinkBookArch" }}
+monitor = eDP-1, 1920x1200@60, auto, 1, vrr, 2
+{{- else if eq .chezmoi.hostname "B650Arch" }}
+monitorv2 {
+    output = DP-1
+    mode = 2560x1440@144
+    position = 0x0
+    scale = 1
+    vrr = 2
+    # bitdepth = 10
+    # cm = hdr
+    # sdrbrightness = 1.2
+    # sdrsaturation = 0.98
+    # sdr_min_luminance = 0.005
+    # sdr_max_luminance = 140
+}
 
-monitor=,preferred,auto,auto
+monitorv2 {
+    output = DP-2
+    mode = 2560x1440@75
+    position = auto-right
+    scale = 1
+}
+{{- else if eq .chezmoi.hostname "ant" }}
+monitor=DP-2, 2560x1440@60, 0x0, 1
+monitor=HDMI-A-1, 2560x1440@60, 2560x0, 1
+{{- end }}
+
+monitor= , preferred, auto, 1
 
 # vim: ft=hyprlang
