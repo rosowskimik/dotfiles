@@ -1,5 +1,11 @@
-{{- if eq .chezmoi.hostname "ThinkBookArch" }}
-monitor = eDP-1, 1920x1200@60, auto, 1, vrr, 2
+{{ if eq .chezmoi.hostname "ThinkBookArch" -}}
+monitorv2 {
+    output = eDP-1
+    mode = 1920x1200@60
+    position = 0x0
+    scale = 1
+    vrr = 2
+}
 {{- else if eq .chezmoi.hostname "B650Arch" }}
 monitorv2 {
     output = DP-1
