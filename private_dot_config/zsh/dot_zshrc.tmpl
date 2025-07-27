@@ -66,6 +66,8 @@ fi
 
 {{ if eq .chezmoi.osRelease.id "arch" -}}
 {{ if stat "/usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh" -}}
+typeset -gA FAST_HIGHLIGHT
+FAST_HIGHLIGHT[chroma-make-cache-global]=1
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 {{- else -}}
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
