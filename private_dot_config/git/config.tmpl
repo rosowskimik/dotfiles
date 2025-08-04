@@ -52,6 +52,9 @@
     cookiefile = {{ joinPath .chezmoi.homeDir ".config/git/cookies" }}
 {{- end }}
 
+[url "git@dev.antmicro.com:"]
+	insteadOf = https://dev.antmicro.com/git/repositories
+
 [url "git@github.com:"]
     insteadOf = gh:
 [github]
