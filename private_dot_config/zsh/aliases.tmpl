@@ -41,5 +41,6 @@ alias zzenv="export ZEPHYR_BASE="${ZEPHYR_WORKSPACE}/zephyr" && zenv"
 alias docker-ci='docker container run --rm -it -v`pwd`:`pwd` --mount type=bind,source=$SSH_AUTH_SOCK,target=/ssh-agent --env SSH_AUTH_SOCK=/ssh-agent -w`pwd` --init'
 alias ssho='ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 alias scpo='scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
+alias kssho='kitten ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 
 # vim:ft=zsh
