@@ -137,6 +137,27 @@ function disasm() {
     gdb --batch --nx -ex "disas/r ${2}" "$1"
 }
 
+function apptainer-ci() {
+    if [[ -z $1 ]]; then
+        echo "Usage: apptainer-ci <image>"
+        exit 1
+    fi
+
+    local image_arg="$1"
+    local image_path=""
+
+    if [[ -f $image_arg ]]; then
+        image_path="$image_arg"
+    elif [[ -n $APPTAINER_CONTAINERS && -d $APPTAINER_CONTAINERS && -f "$APPTAINER_CONTAINERS/$image_arg" ]]; then
+        image_path="$APPTAINER_CONTAINERS/$image_arg"
+    else
+        echo "Container image '$image_arg' not found"
+        exit 1
+    fi
+
+    env -u SHELL sudo -E apptainer run --home ${HOME} --allow-setuid "$@" "$image_path"
+}
+
 ## END OF FILE #################################################################
 # vim:filetype=zsh foldmethod=marker autoindent expandtab shiftwidth=4
 # Local variables:
