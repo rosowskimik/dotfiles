@@ -8,8 +8,8 @@ export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 
 # Apptainer stuff
 export APPTAINER_CACHEDIR="$XDG_CACHE_HOME/apptainer"
+export APPTAINER_CONFIGDIR="$XDG_CONFIG_HOME/apptainer"
 export APPTAINER_CONTAINERS="$XDG_SRC_HOME/apptainer"
-export APPTAINER_BINDPATH="${WAYLAND_DISPLAY:+${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY},}$SSH_AUTH_SOCK"
 
 # Bat stuff
 export BAT_STYLE="-numbers"
