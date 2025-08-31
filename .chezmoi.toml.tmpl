@@ -27,12 +27,6 @@
 [diff]
 	command = "delta"
 	args = ["-n", "-s", "--pager", "never", "{{ "{{" }} .Destination {{ "}}" }}", "{{ "{{" }} .Target {{ "}}" }}"]
-	{{- if eq .chezmoi.osRelease.id "debian" }}
-	pager = "batcat"
-	{{- else }}
-	pager = "bat"
-	{{- end }}
-	pagerArgs = ["-p"]
 
 [data]
 	isHeadless = {{ $isHeadless }}
