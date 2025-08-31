@@ -1,2 +1,11 @@
+[c]
+detect_folders = ["src"]
+
+[cpp]
+detect_folders = ["src"]
+
+[container]
+symbol = "\uf21f"
+
 [directory]
 fish_style_pwd_dir_length = 1
