@@ -3,19 +3,19 @@ compdef _apptainer-ci apptainer-ci
 
 # zsh completion for chezmoi                              -*- shell-script -*-
 
-_apptianer-ci() {
+_apptainer-ci() {
   local -a container_files
 
   if [[ -n $APPTAINER_CONTAINERS && -d $APPTAINER_CONTAINERS ]]; then
-    container_files=($(APPTAINER_CONTAINERS)/*(N:t))
+    container_files=($APPTAINER_CONTAINERS/*(N:t))
   fi
 
   _alternative \
     'files:local file:_files' \
     "container_files:container from \$APPTAINER_CONTAINERS: ( ${container_files} )"
 }
-#
+
 # don't run the completion function when being source-ed or eval-ed
-if [ "$funcstack[1]" = "_apptianer-ci" ]; then
-  _apptianer-ci
+if [ "$funcstack[1]" = "_apptainer-ci" ]; then
+  _apptainer-ci
 fi
