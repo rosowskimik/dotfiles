@@ -4,15 +4,14 @@ $mainMod = SUPER
 bind = $mainMod,        return,     exec, kitty -1
 bind = $mainMod SHIFT,  return,     exec, nemo
 bind = $mainMod,        B,          exec, firefox
-bind = Ctrl SHIFT,      P,          exec, firefox --private-window
+bind = CTRL SHIFT,      P,          exec, firefox --private-window
 bind = $mainMod,        N,          exec, mousepad
 bind = $mainMod,        P,          exec, pkill tofi-drun || tofi-drun -c {{ .chezmoi.homeDir }}/.config/tofi/tofi-run.conf
 bind = $mainMod,        V,          exec, cliphist list | tofi -c {{ .chezmoi.homeDir }}/.config/tofi/tofi-clipboard.conf | cliphist decode | wl-copy
-bind = $mainMod SHIFT,  V,          exec, nwg-clipman
 bind = $mainMod SHIFT,  C,          exec, hyprpicker -f hex -a | xargs -I_ notify-send -t 2500 "Copied _ to clipboard"
-bind = ,                Print,      exec, hyprshot -m output --clipboard-only -- imv
-bind = $mainMod,        Print,      exec, hyprshot -m window --clipboard-only -- imv
-bind = $mainMod SHIFT,  S,          exec, hyprshot -m region --clipboard-only -- imv
+bind = ,                Print,      exec, hyprshot -m output -z -s -o {{ .chezmoi.homeDir }}/Pictures/Screenshots
+bind = $mainMod,        Print,      exec, hyprshot -m window -z -s -o {{ .chezmoi.homeDir }}/Pictures/Screenshots
+bind = $mainMod SHIFT,  S,          exec, hyprshot -m region -z -s -o {{ .chezmoi.homeDir }}/Pictures/Screenshots
 bind = $mainMod SHIFT,  X,          exec, wleave -f
 
 bind = ,                XF86Calculator,         exec,   galculator
@@ -60,12 +59,6 @@ bind = CTRL SHIFT, h, movecurrentworkspacetomonitor, l
 bind = CTRL SHIFT, l, movecurrentworkspacetomonitor, r
 bind = CTRL SHIFT, k, movecurrentworkspacetomonitor, u
 bind = CTRL SHIFT, j, movecurrentworkspacetomonitor, d
-
-# Move window to monitor
-#bind = CTRL SHIFT, h, movewindow, mon:l
-#bind = CTRL SHIFT, l, movewindow, mon:r
-#bind = CTRL SHIFT, k, movewindow, mon:u
-#bind = CTRL SHIFT, j, movewindow, mon:d
 
 # Resize
 binde = $mainMod SHIFT, h, resizeactive, -15 0
@@ -126,4 +119,3 @@ bindm = $mainMod, mouse:272, movewindow
 bindm = $mainMod, mouse:273, resizewindow
 
 # vim: ft=hyprlang
-
