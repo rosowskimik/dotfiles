@@ -1,4 +1,4 @@
-#Type	Path			    Mode	User	Group	Age	Argument
-e		%h/.local/state	    0700	{{ .chezmoi.uid }}	{{ .chezmoi.gid }}	3d	-
-d       %h/.local/state/zsh 0700    {{ .chezmoi.uid }}	{{ .chezmoi.gid }}  -   -
-e		%h/.cache		    0700	{{ .chezmoi.uid }}	{{ .chezmoi.gid }}	5d	-
+#Type	Path				Mode	User	Group	Age	Argument
+d	%h/.cache				0700	-	-	3d	-
+d	%h/.local/state			0700	-	-	15d	-
+d	%h/.local/state/nvim	0700	-	-	7d	-
