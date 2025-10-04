@@ -1,0 +1,31 @@
+#compdef nspawn_ci
+compdef _nspawn_ci nspawn_ci
+
+_nspawn_ci() {
+  local -a mems cpus ios
+  local state ret=1
+
+  mems=(1G 2G 3G 4G 6G 8G 12G 16G 20G 26G 32G 64G)
+  cpus=(1 5 10 20 40 50 80 90 95 100 500 1000)
+  ios=(1 5 10 20 40 80 90 95 100 500 1000)
+
+  _arguments -C -s -S \
+    '--mem=-[Set MemoryHigh]:memory size:->mem' \
+    '--mem-max=-[Set MemoryMax]:memory size:->memmax' \
+    '--cpu=-[Set CPUWeight (1..10000)]:weight:->cpu' \
+    '--io=-[Set IOWeight (1..10000)]:weight:->io' \
+    '*::args:->args' && ret=0
+
+  case "$state" in
+  mem | memmax) _values 'memory size' $mems ;;
+  cpu) _values 'CPUWeight' $cpus ;;
+  io) _values 'IOWeight' $ios ;;
+  args) _normal ;;
+  esac
+  return ret
+}
+
+# don't run the completion function when being source-ed or eval-ed
+if [ "$funcstack[1]" = "_nspawn_ci" ]; then
+  _nspawn_ci
+fi
