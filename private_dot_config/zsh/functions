@@ -137,25 +137,140 @@ function disasm() {
     gdb --batch --nx -ex "disas/r ${2}" "$1"
 }
 
-function apptainer-ci() {
-    if [[ -z $1 ]]; then
-        echo "Usage: apptainer-ci <image>"
-        exit 1
+function nspawn_ci() {
+    emulate -L zsh
+    setopt typeset_silent
+
+    local mem="" mem_max="" cpu="" io="" machine=""
+    local -a passthru property_args bind_args env_args cmd
+
+    # Parse flags + positional <machine>; pass-through after "--"
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+        --)
+            shift
+            passthru=("$@")
+            break
+            ;;
+        -h | --help)
+            print -r -- "Usage: nspawn_ci [--mem VAL] [--mem-max VAL] [--cpu VAL] [--io VAL] <machine> [-- ...]"
+            return 0
+            ;;
+        --mem=*)
+            mem="${1#*=}"
+            shift
+            ;;
+        --mem)
+            shift
+            mem="${1:-}"
+            [[ -z $mem ]] && {
+                print -ru2 -- "Missing value for --mem"
+                return 2
+            }
+            ;;
+        --mem-max=*)
+            mem_max="${1#*=}"
+            shift
+            ;;
+        --mem-max)
+            shift
+            mem_max="${1:-}"
+            [[ -z $mem_max ]] && {
+                print -ru2 -- "Missing value for --mem-max"
+                return 2
+            }
+            ;;
+        --cpu=*)
+            cpu="${1#*=}"
+            shift
+            ;;
+        --cpu)
+            shift
+            cpu="${1:-}"
+            [[ -z $cpu ]] && {
+                print -ru2 -- "Missing value for --cpu"
+                return 2
+            }
+            ;;
+        --io=*)
+            io="${1#*=}"
+            shift
+            ;;
+        --io)
+            shift
+            io="${1:-}"
+            [[ -z $io ]] && {
+                print -ru2 -- "Missing value for --io"
+                return 2
+            }
+            ;;
+        --*)
+            print -ru2 -- "Unknown option: $1 (use -- to pass it to nspawn)"
+            return 2
+            ;;
+        *)
+            if [[ -z $machine ]]; then
+                machine="$1"
+                shift
+            else
+                print -ru2 -- "Unexpected argument: $1"
+                return 2
+            fi
+            ;;
+        esac
+    done
+
+    if [[ -z $machine ]]; then
+        print -ru2 -- "Error: missing <machine>"
+        return 2
     fi
 
-    local image_arg="$1"
-    local image_path=""
-
-    if [[ -f $image_arg ]]; then
-        image_path="$image_arg"
-    elif [[ -n $APPTAINER_CONTAINERS && -d $APPTAINER_CONTAINERS && -f "$APPTAINER_CONTAINERS/$image_arg" ]]; then
-        image_path="$APPTAINER_CONTAINERS/$image_arg"
-    else
-        echo "Container image '$image_arg' not found"
-        exit 1
+    local dir="/var/lib/machines/${machine}"
+    if [[ ! -d $dir ]]; then
+        print -ru2 -- "Error: ${dir} does not exist"
+        return 1
     fi
 
-    env -u SHELL sudo -E apptainer run --home ${HOME} --allow-setuid "$@" "$image_path"
+    # Resource properties (only set if provided)
+    [[ -n $mem ]] && property_args+=("--property=MemoryHigh=${mem}")
+    [[ -n $mem_max ]] && property_args+=("--property=MemoryMax=${mem_max}")
+    [[ -n $cpu ]] && property_args+=("--property=CPUWeight=${cpu}")
+    [[ -n $io ]] && property_args+=("--property=IOWeight=${io}")
+
+    # Binds/env as in your command (added guards so missing vars don't break)
+    bind_args+=("--overlay=${HOME}:/home/oci")
+    bind_args+=("--bind=${PWD}")
+    env_args+=("--setenv=WAYLAND_DISPLAY=${WAYLAND_DISPLAY}")
+
+    if [[ -n ${XDG_RUNTIME_DIR:-} && -d ${XDG_RUNTIME_DIR} ]]; then
+        bind_args+=("--bind=${XDG_RUNTIME_DIR}")
+        env_args+=("--setenv=XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR}")
+    fi
+    if [[ -n ${SSH_AUTH_SOCK:-} && -S ${SSH_AUTH_SOCK} ]]; then
+        bind_args+=("--bind=${SSH_AUTH_SOCK}")
+        env_args+=("--setenv=SSH_AUTH_SOCK=${SSH_AUTH_SOCK}")
+    fi
+
+    cmd=(
+        sudo systemd-nspawn
+        --as-pid2
+        --ephemeral
+        --suppress-sync=true
+        --register=no
+        --user="${USER}"
+        --background=""
+        --chdir="${PWD}"
+        --directory="${dir}"
+        "${property_args[@]}"
+        "${bind_args[@]}"
+        "${env_args[@]}"
+    )
+
+    if ((${#passthru[@]})); then
+        cmd+=("${passthru[@]}")
+    fi
+
+    "${cmd[@]}"
 }
 
 ## END OF FILE #################################################################
