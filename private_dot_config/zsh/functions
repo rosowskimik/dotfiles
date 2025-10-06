@@ -226,10 +226,6 @@ function nspawn_ci() {
     fi
 
     local dir="/var/lib/machines/${machine}"
-    if [[ ! -d $dir ]]; then
-        print -ru2 -- "Error: ${dir} does not exist"
-        return 1
-    fi
 
     # Resource properties (only set if provided)
     [[ -n $mem ]] && property_args+=("--property=MemoryHigh=${mem}")
