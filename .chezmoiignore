@@ -2,6 +2,7 @@
 .zshenv
 .config/alacritty
 .config/dunst
+.config/fuzzel
 .config/hypr
 .config/kitty
 .config/tofi
