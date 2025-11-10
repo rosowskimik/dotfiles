@@ -1,0 +1,20 @@
+[tabs]
+active = { fg = "#2F4159", bg = "#CDCECF", bold = true }
+inactive = { fg = "#CDCECF", bg = "#2F4159" }
+
+sep_outer = { open = "", close = "" }
+sep_inner = { open = "", close = "" }
+
+[mode]
+normal_main = { fg = "#131A24", bg = "#719CD6" }
+normal_alt = { fg = "#CDCECF", bg = "#2F4159" }
+
+select_main = { fg = "#131A24", bg = "#9D79D6" }
+select_alt = { fg = "#CDCECF", bg = "#3C3759" }
+
+unset_main = { fg = "#131A24", bg = "#9D79D6" }
+unset_alt = { fg = "#CDCECF", bg = "#3C3759" }
+
+[status]
+sep_left = { open = "", close = "" }
+sep_right = { open = "", close = "" }

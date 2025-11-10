@@ -7,7 +7,7 @@ bind = $mainMod,        B,      exec, firefox
 bind = CTRL SHIFT,      P,      exec, firefox --private-window
 bind = $mainMod,        N,      exec, mousepad
 bind = $mainMod,        P,      exec, pkill fuzzel || fuzzel
-bind = $mainMod,        V,      exec, cliphist list | fuzzel --dmenu --no-sort --hide-prompt --font=monospace:size=11 --width=60 --tabs=2 | cliphist decode | wl-copy
+bind = $mainMod,        V,      exec, cliphist list | fuzzel --dmenu --font=UbuntuMono-R:size=11 --no-sort --hide-prompt --width=80 --tabs=2 | cliphist decode | wl-copy
 bind = $mainMod SHIFT,  C,      exec, hyprpicker -f hex -a | xargs -I_ notify-send -t 2500 "Copied _ to clipboard"
 bind = ,                Print,  exec, hyprshot -m output -z -o {{ .chezmoi.homeDir }}/Pictures/Screenshots
 bind = $mainMod,        Print,  exec, hyprshot -m window -z -o {{ .chezmoi.homeDir }}/Pictures/Screenshots
