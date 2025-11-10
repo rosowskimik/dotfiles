@@ -2,7 +2,7 @@ $mainMod = SUPER
 
 # Exec
 bind = $mainMod,        return, exec, kitty -1
-bind = $mainMod SHIFT,  return, exec, nemo
+bind = $mainMod SHIFT,  return, exec, kitty -1 -d {{ .chezmoi.homeDir }}/Downloads yazi
 bind = $mainMod,        B,      exec, firefox
 bind = CTRL SHIFT,      P,      exec, firefox --private-window
 bind = $mainMod,        N,      exec, mousepad
