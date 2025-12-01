@@ -1,0 +1,3 @@
+[grep]
+tool = ripgrep
+ripgrep-args = --smart-case --column --heading
