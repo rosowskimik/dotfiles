@@ -25,6 +25,7 @@ format = '\[[$symbol]($style)\]'
 
 [cmd_duration]
 format = '\[[⏱ $duration]($style)\]'
+min_time = 5_000
 
 [cobol]
 format = '\[[$symbol]($style)\]'
