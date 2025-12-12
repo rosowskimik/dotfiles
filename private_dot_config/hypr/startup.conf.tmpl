@@ -1,16 +1,16 @@
-exec-once = uwsm app -- hyprpaper
-exec-once = uwsm app -- waybar
-exec-once = uwsm app -- dunst
-exec-once = uwsm app -- hypridle
-exec-once = uwsm app -- cliphist wipe
-exec-once = uwsm app -- wl-paste --type text --watch cliphist store
-exec-once = uwsm app -- wl-paste --type image --watch cliphist store
-exec-once = uwsm app -- sway-audio-idle-inhibit
+exec-once = uwsm-app -- hyprpaper
+exec-once = uwsm-app -- waybar
+exec-once = uwsm-app -- dunst
+exec-once = uwsm-app -- hypridle
+exec-once = uwsm-app -- cliphist wipe
+exec-once = uwsm-app -- wl-paste --type text --watch cliphist store
+exec-once = uwsm-app -- wl-paste --type image --watch cliphist store
+exec-once = uwsm-app -- sway-audio-idle-inhibit
 {{- if eq .chezmoi.hostname "ant" }}
-exec-once = uwsm app -- udiskie -s -A
-exec-once = uwsm app -- tmux new-session -s ssh -d
-{{- else }}
-exec-once = uwsm app -- udiskie -s -a
+exec-once = uwsm-app -- udiskie -s -A
+exec-once = uwsm-app -- tmux new-session -s ssh -d
+{{- else }}     -
+exec-once = uwsm-app -- udiskie -s -a
 {{- end }}
 
 exec-once = xhost + local:
