@@ -1,41 +1,33 @@
-# Example windowrule v1
-# windowrule = float, ^(kitty)$
-# Example windowrule v2
-# windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
-# See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
-windowrulev2 = float, class:^(galculator)$
-windowrulev2 = float, class:^(org.kde.polkit-kde-authentication-agent-1)$
-windowrulev2 = float, title:^(Picture-in-Picture)$
-windowrulev2 = float, class:^(firefox)$, title:^(Firefox)$
-windowrulev2 = float, class:^(firefoxdeveloperedition)$, title:^(Firefox)$
-windowrulev2 = float, class:^(blueman-sendto)$
-windowrulev2 = float, title:^(Steam setup)$
-windowrulev2 = float, title:^(Steam Settings)$
-windowrulev2 = float, class:^(steam)$, title:^(Friends List)$
-windowrulev2 = float, class:^(kicad)$, title:^(Assign Footprints)$
-windowrulev2 = float, class:^(kicad)$, title:^(Footprint:.*)$
-windowrulev2 = float, class:^(kicad)$, title:^(3D Viewer)$
-windowrulev2 = float, class:^(file-png)$
+# https://wiki.hyprland.org/Configuring/Window-Rules/
+windowrule = float on, match:class ^(galculator)$
+windowrule = float on, match:class ^(org.kde.polkit-kde-authentication-agent-1)$
+windowrule = float on, match:class ^(firefox)$, match:title ^(Firefox)$
+windowrule = float on, match:class ^(firefoxdeveloperedition)$, match:title ^(Firefox)$
+windowrule = float on, match:class ^(blueman-sendto)$
+windowrule = float on, match:title ^(Steam Settings)$
+windowrule = float on, match:class ^(steam)$, match:title ^(Friends List)$
+windowrule = float on, match:class ^(kicad)$, match:title ^(Assign Footprints)$
+windowrule = float on, match:class ^(kicad)$, match:title ^(Footprint:.*)$
+windowrule = float on, match:class ^(kicad)$, match:title ^(3D Viewer)$
+windowrule = float on, match:class ^(file-png)$
 
-windowrulev2 = pin, title:^(Picture-in-Picture)$
+windowrule = float on, pin on, match:title ^(Picture-in-Picture)$
 
-windowrulev2 = noanim, title:^(wleave)$
+windowrule = no_anim on, match:title ^(wleave)$
 
-windowrulev2 = group, class:^(virt-manager)$
-windowrulev2 = group, class:^(kicad)$
-windowrulev2 = group barred, class:^(kitty)$
+windowrule = group 0, match:class ^(virt-manager)$
+windowrule = group 0, match:class ^(kicad)$
+windowrule = group barred, match:class ^(kitty)$
 
-windowrulev2 = bordersize 0, class:^(org.gnome.FileRoller)$, title:^$, floating:1
-windowrulev2 = bordersize 0, initialTitle:^(Sign in to Steam)$, floating:1
-windowrulev2 = bordersize 0, initialTitle:^(SteamWebhelper)$, floating:1
+windowrule = border_size 0, match:class ^(org.gnome.FileRoller)$, match:title ^$, match:float 1
+windowrule = border_size 0, match:initial_title ^(Sign in to Steam)$, match:float 1
+windowrule = border_size 0, match:initial_title ^(SteamWebhelper)$, match:float 1
 
 # old no_gaps_when_only
 workspace = w[tv1], gapsout:0, gapsin:0
 workspace = f[1], gapsout:0, gapsin:0
-windowrulev2 = bordersize 0, floating:0, onworkspace:w[tv1]
-windowrulev2 = rounding 0, floating:0, onworkspace:w[tv1]
-windowrulev2 = bordersize 0, floating:0, onworkspace:f[1]
-windowrulev2 = rounding 0, floating:0, onworkspace:f[1]
+windowrule = border_size 0, rounding 0, match:float 0, match:workspace w[tv1]
+windowrule = border_size 0, rounding 0, match:float 0, match:workspace f[1]
 
 {{- if eq .chezmoi.hostname "ant" }}
 workspace = 1, on-created-empty:[silent] firefox, monitor:DP-2, default:true

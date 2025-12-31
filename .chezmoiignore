@@ -12,6 +12,7 @@
 .config/code-flags.conf
 .config/electron13-flags.conf
 .config/electron25-flags.conf
+.config/xdg-terminals.list
 {{- else }}
 .zprofile
 {{- end }}
@@ -23,4 +24,5 @@
 {{- if ne .chezmoi.osRelease.id "arch" }}
 .config/paru
 .config/pacman
+.confg/arch-update
 {{- end }}
