@@ -3,7 +3,7 @@ fish_style_pwd_dir_length = 1
 
 [c]
 detect_folders = ["src"]
-format = '\[[$symbol($version(-$name))]($style)\]'
+format = '\[[$symbol($name)]($style)\]'
 
 [cmake]
 disabled = true
@@ -262,7 +262,7 @@ format = '\[[$symbol$workspace]($style)\]'
 format = '\[[$time]($style)\]'
 
 [typst]
-symbol = "t"
+symbol = 't'
 format = '\[[$symbol]($style)\]'
 
 [username]

@@ -27,6 +27,7 @@
 [diff]
 	command = "delta"
 	args = ["-n", "-s", "--pager", "never", "{{ "{{" }} .Destination {{ "}}" }}", "{{ "{{" }} .Target {{ "}}" }}"]
+	pager = ""
 
 [data]
 	isHeadless = {{ $isHeadless }}
