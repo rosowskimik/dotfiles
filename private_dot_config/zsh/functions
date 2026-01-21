@@ -141,7 +141,7 @@ function nspawn_ci() {
     emulate -L zsh
     setopt typeset_silent
 
-    local mem="" mem_max="" cpu="" io="" machine=""
+    local mem="" mem_max="" cpu="" quota="" io="" machine=""
     local -a passthru property_args bind_args env_args cmd
 
     # Parse flags + positional <machine>; pass-through after "--"
@@ -153,7 +153,7 @@ function nspawn_ci() {
             break
             ;;
         -h | --help)
-            print -r -- "Usage: nspawn_ci [--mem VAL] [--mem-max VAL] [--cpu VAL] [--io VAL] <machine> [-- ...]"
+            print -r -- "Usage: nspawn_ci [--mem VAL] [--mem-max VAL] [--cpu VAL] [--quota VAL] [--io VAL] <machine> [-- ...]"
             return 0
             ;;
         --mem=*)
@@ -189,6 +189,18 @@ function nspawn_ci() {
             cpu="${1:-}"
             [[ -z $cpu ]] && {
                 print -ru2 -- "Missing value for --cpu"
+                return 2
+            }
+            ;;
+        --quota=*)
+            quota="${1#*=}"
+            shift
+            ;;
+        --quota)
+            shift
+            quota="${1:-}"
+            [[ -z $quota ]] && {
+                print -ru2 -- "Missing value for --quota"
                 return 2
             }
             ;;
@@ -231,6 +243,7 @@ function nspawn_ci() {
     [[ -n $mem ]] && property_args+=("--property=MemoryHigh=${mem}")
     [[ -n $mem_max ]] && property_args+=("--property=MemoryMax=${mem_max}")
     [[ -n $cpu ]] && property_args+=("--property=CPUWeight=${cpu}")
+    [[ -n $quota ]] && property_args+=("--property=CPUQuota=$((quota * 100))%")
     [[ -n $io ]] && property_args+=("--property=IOWeight=${io}")
 
     # Binds/env as in your command (added guards so missing vars don't break)
@@ -254,7 +267,7 @@ function nspawn_ci() {
         --suppress-sync=true
         --register=no
         --user="${USER}"
-        --background=""
+        --background='""'
         --chdir="${PWD}"
         --directory="${dir}"
         "${property_args[@]}"
