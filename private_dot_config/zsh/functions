@@ -267,7 +267,7 @@ function nspawn_ci() {
         --suppress-sync=true
         --register=no
         --user="${USER}"
-        --background='""'
+        --background=""
         --chdir="${PWD}"
         --directory="${dir}"
         "${property_args[@]}"
