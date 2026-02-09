@@ -33,6 +33,11 @@ export GOPATH="$XDG_DATA_HOME/go"
 export GOHOME="$COMPILERS_BASE/go"
 {{- end }}
 
+{{- if lookPath "podman" }}
+# Podman stuff
+export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock
+{{- end }}
+
 # Python stuff
 export WORKON_HOME="$XDG_DATA_HOME/virtualenv"
 {{- if .isBtrfs }}
