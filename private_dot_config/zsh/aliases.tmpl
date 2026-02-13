@@ -39,7 +39,7 @@ alias yd='y .'
 alias ssho="ssh -o UserKnownHostsFile /dev/null"
 alias zenv="source ${ZEPHYR_WEST}/bin/activate"
 alias zzenv="export ZEPHYR_BASE="${ZEPHYR_WORKSPACE}/zephyr" && zenv"
-alias docker-ci='docker container run --rm -it -v`pwd`:`pwd` --mount type=bind,source=$SSH_AUTH_SOCK,target=/ssh-agent --env SSH_AUTH_SOCK=/ssh-agent -w`pwd` --init'
+alias docker-ci='sudo podman container run --rm -it -v`pwd`:`pwd` --mount type=bind,source=$HOME/.ssh/known_hosts,target=/root/.ssh/known_hosts --mount type=bind,source=$SSH_AUTH_SOCK,target=/ssh-agent --env SSH_AUTH_SOCK=/ssh-agent -w`pwd` --init'
 alias podman-ci='podman container run --rm -it -v`pwd`:`pwd` --mount type=bind,source=$HOME/.ssh/known_hosts,target=/root/.ssh/known_hosts --mount type=bind,source=$SSH_AUTH_SOCK,target=/ssh-agent --env SSH_AUTH_SOCK=/ssh-agent -w`pwd` --init'
 alias ssho='ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 alias scpo='scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
@@ -47,5 +47,6 @@ alias kssho='kitten ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/n
 alias dr='dragon-drop'
 alias dra='dr -x -A -i -T'
 alias hx="helix"
+alias crm="__a=$(pwd); cd .. && echo ${__a} && rm -rI ${__a}"
 
 # vim:ft=zsh
