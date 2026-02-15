@@ -65,12 +65,11 @@
         "on-click": "pavucontrol",
         "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
     },
-{{- if eq .chezmoi.hostname "ThinkBookArch" }}
+{{- if eq .chezmoi.hostname "ThinkPadArch" }}
     "backlight": {
         "interval": 1000,
         "format": "{percent}% {icon}",
         "format-icons": ["", "", "", "", "\udb81\udce0"],
-        "on-click": "kill $(pidof wlsunset) || setsid wlsunset",
     },
 {{- end }}
 {{- if not .isDesktop }}

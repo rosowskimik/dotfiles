@@ -3,9 +3,9 @@ general {
     before_sleep_cmd = loginctl lock-session
     after_sleep_cmd = hyprctl dispatch dpms on
 }
-{{ if eq .chezmoi.hostname "ThinkBookArch" }}
+{{ if eq .chezmoi.hostname "ThinkPadArch" }}
 listener {
-    timeout = 120
+    timeout = 180
     on-timeout = brightnessctl -s set 10
     on-resume = brightnessctl -r
 }
