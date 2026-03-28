@@ -1,5 +1,17 @@
 set auto-load safe-path /
 set debuginfod enabled off
+
+python
+def try_set_intel(event):
+	try:
+		arch = gdb.selected_frame().architecture().name()
+		if arch in ["i386", "x86-64"]:
+			gdb.execute("set disassembly-flavor intel")
+	except gdb.error:
+		pass
+
+gdb.events.new_objfile.connect(try_set_intel)
+end
 # set disassembly-flavor intel
 
 tui new-layout sasm { -horizontal src 2 asm 1 } 3 cmd 1
