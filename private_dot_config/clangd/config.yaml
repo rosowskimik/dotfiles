@@ -21,3 +21,5 @@ CompileFlags:
     - -mpreferred-stack-boundary*
     - -mrecord-mcount
     - -mword-relocations
+  Add:
+    - -Wno-ignored-attributes
