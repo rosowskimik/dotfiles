@@ -281,4 +281,4 @@ format = '\[[$symbol]($style)\]'
 format = '\[[$symbol]($style)\]'
 
 [zig]
-format = '\[[$symbol]($style)\]'
+format = '\[[$symbol($version)]($style)\]'
