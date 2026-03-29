@@ -1,142 +1,83 @@
 $mainMod = SUPER
 
 # Exec
-bind = $mainMod,        return, exec, kitty -1
-bind = $mainMod SHIFT,  return, exec, kitty -1 -d {{ .chezmoi.homeDir }}/Downloads yazi
-bind = $mainMod,        B,      exec, firefox
-bind = CTRL SHIFT,      P,      exec, firefox --private-window
-bind = $mainMod,        N,      exec, mousepad
-bind = $mainMod,        P,      exec, pkill fuzzel || fuzzel
-bind = $mainMod,        V,      exec, cliphist list | fuzzel --dmenu --font=UbuntuMono-R:size=11 --no-sort --hide-prompt --width=80 --tabs=2 | cliphist decode | wl-copy
-bind = $mainMod SHIFT,  C,      exec, hyprpicker -f hex -a | xargs -I_ notify-send -t 2500 "Copied _ to clipboard"
-bind = ,                Print,  exec, hyprshot -m output -z -o {{ .chezmoi.homeDir }}/Pictures/Screenshots
-bind = $mainMod,        Print,  exec, hyprshot -m window -z -o {{ .chezmoi.homeDir }}/Pictures/Screenshots
-bind = $mainMod SHIFT,  S,      exec, hyprshot -m region -z -o {{ .chezmoi.homeDir }}/Pictures/Screenshots
-bind = $mainMod SHIFT,  X,      exec, wleave -f
+bind = $mainMod,        return, exec,   kitty -1
+bind = $mainMod SHIFT,  return, exec,   kitty -1 -d {{ .chezmoi.homeDir }} yazi
+bind = $mainMod,        B,      exec,   firefox
+bind = CTRL SHIFT,      P,      exec,   firefox --private-window
+bind = $mainMod,        P,      exec,   pkill fuzzel || fuzzel
+bind = $mainMod,        V,      exec,   cliphist list | fuzzel --dmenu --font="MonaspaceArgonVar:size=10" --no-sort --hide-prompt --width=80 --tabs=2 | cliphist decode | wl-copy
+bind = $mainMod SHIFT,  C,      exec,   _color=$(hyprpicker --format=hex --autocopy) && echo $_color | xargs -I_ notify-send -t 2500 "Copied _ to clipboard"
+bind = ,                Print,  exec,   hyprshot --mode output --freeze --raw | satty --filename - --output-filename "{{ .chezmoi.homeDir }}/Pictures/Screenshots/%Y-%m-%d_%H%M%S.png"
+bind = $mainMod,        Print,  exec,   hyprshot --mode window --freeze --raw | satty --filename - --output-filename "{{ .chezmoi.homeDir }}/Pictures/Screenshots/%Y-%m-%d_%H%M%S.png"
+bind = $mainMod SHIFT,  S,      exec,   hyprshot --mode region --freeze --raw | satty --filename - --output-filename "{{ .chezmoi.homeDir }}/Pictures/Screenshots/%Y-%m-%d_%H%M%S.png"
+bind = $mainMode SHIFT, X,      exec,   wleave --close-on-lost-focus --no-version-info
 
-bind = ,                XF86Calculator,         exec,   galculator
-bindl  = ,              XF86AudioMute,          exec,   pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindel = ,              XF86AudioRaiseVolume,   exec,   pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindel = ,              XF86AudioLowerVolume,   exec,   pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindel = ,              XF86MonBrightnessUp,    exec,   brightnessctl set +5%
-bindel = ,              XF86MonBrightnessDown,  exec,   brightnessctl set 5%-
+# Media keys
+bindl   = , XF86AudioMute,          exec,   pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindel  = , XF86AudioRaiseVolume,   exec,   pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindel  = , XF86AudioLowerVolume,   exec,   pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindel  = , XF86MonBrightnessUp,    exec,   brightnessctl set +5%
+bindel  = , XF86MonBrightnessDown,  exec,   brightnessctl set -5%
 
-bind = $mainMod,        Q,          killactive,
-bind = $mainMod,        grave,      togglefloating,
-bind = $mainMod SHIFT,  P,          pin,
+# Basic
+bind = $mainMod,        Q,          killactive
+bind = $mainMod,        Tab,        togglefloating
+bind = $mainMod SHIFT,  P,          pin
 bind = $mainMod,        F,          fullscreen, 1
 bind = $mainMod SHIFT,  F,          fullscreen, 0
-bind = $mainMod,        semicolon,  layoutmsg, promote
 bind = $mainMod,        G,          togglegroup
-bind = $mainMod,        Tab,        focuscurrentorlast
+bind = $mainMod,        semicolon,  focuscurrentorlast
 
-# Move focus with mainMod + vim keys
-bind = $mainMod, h, movefocus, l
-bind = $mainMod, l, movefocus, r
-bind = $mainMod, k, movefocus, u
-bind = $mainMod, j, movefocus, d
+# Focus
+bind = $mainMod,    h,  movefocus,  l
+bind = $mainMod,    j,  movefocus,  d
+bind = $mainMod,    k,  movefocus,  u
+bind = $mainMod,    l,  movefocus,  r
 
-# Change group active
-bind = $mainMod CTRL, h, changegroupactive, b
-bind = $mainMod CTRL, l, changegroupactive, f
-bind = $mainMod CTRL, k, changegroupactive, f
-bind = $mainMod CTRL, j, changegroupactive, b
+# Group active
+bind = $mainMod CTRL,   h,  changegroupactive,  b
+bind = $mainMod CTRL,   j,  changegroupactive,  b
+bind = $mainMod CTRL,   k,  changegroupactive,  f
+bind = $mainMod CTRL,   l,  changegroupactive,  f
 
-# Resize column
-binde = $mainMod SHIFT, h, layoutmsg, colresize -0.003
-binde = $mainMod SHIFT, l, layoutmsg, colresize +0.003
+# Layout
+bind = $mainMod,    slash,  layoutmsg,  togglesplit
 
-# Move column
-bind = ALT CTRL, h, layoutmsg, swapcol l
-bind = ALT CTRL, l, layoutmsg, swapcol r
+bind = $mainMod CTRL,  h,  swapwindow, l
+bind = $mainMod CTRL,  j,  swapwindow, d
+bind = $mainMod CTRL,  k,  swapwindow, u
+bind = $mainMod CTRL,  l,  swapwindow, r
 
-# Fit column
-bind  = ALT SHIFT, h, layoutmsg, fit visible
-bind  = ALT SHIFT, j, layoutmsg, fit tobeg
-bind  = ALT SHIFT, k, layoutmsg, fit toend
-bind  = ALT SHIFT, l, layoutmsg, fit all
+binde = $mainMod SHIFT, h,  resizeactive, -10  0
+binde = $mainMod SHIFT, j,  resizeactive,  0   10
+binde = $mainMod SHIFT, k,  resizeactive,  0  -10
+binde = $mainMod SHIFT, l,  resizeactive,  10  0
 
-# Window manipulation
-bind = $mainMod, m, submap, move_submap
-submap = move_submap
+# Switch workspace
+bind = $mainMod,    1,  workspace, 1
+bind = $mainMod,    2,  workspace, 2
+bind = $mainMod,    3,  workspace, 3
+bind = $mainMod,    4,  workspace, 4
+bind = $mainMod,    5,  workspace, 5
+bind = $mainMod,    6,  workspace, 6
+bind = $mainMod,    7,  workspace, 7
+bind = $mainMod,    8,  workspace, 8
+bind = $mainMod,    9,  workspace, 9
 
-# Swap
-bind = ALT, h, swapwindow, l
-bind = ALT, l, swapwindow, r
-bind = ALT, k, swapwindow, u
-bind = ALT, j, swapwindow, d
+# Move window to workspace
+bind = $mainMod SHIFT,    1,  movetoworkspacesilent, 1
+bind = $mainMod SHIFT,    2,  movetoworkspacesilent, 2
+bind = $mainMod SHIFT,    3,  movetoworkspacesilent, 3
+bind = $mainMod SHIFT,    4,  movetoworkspacesilent, 4
+bind = $mainMod SHIFT,    5,  movetoworkspacesilent, 5
+bind = $mainMod SHIFT,    6,  movetoworkspacesilent, 6
+bind = $mainMod SHIFT,    7,  movetoworkspacesilent, 7
+bind = $mainMod SHIFT,    8,  movetoworkspacesilent, 8
+bind = $mainMod SHIFT,    9,  movetoworkspacesilent, 9
 
-# Move in group
-bind = ALT SHIFT, h, movewindoworgroup, l
-bind = ALT SHIFT, l, movewindoworgroup, r
-bind = ALT SHIFT, k, movewindoworgroup, u
-bind = ALT SHIFT, j, movewindoworgroup, d
-
-# Move workspace to monitor
-bind = ALT CTRL, h, movecurrentworkspacetomonitor, l
-bind = ALT CTRL, l, movecurrentworkspacetomonitor, r
-bind = ALT CTRL, k, movecurrentworkspacetomonitor, u
-bind = ALT CTRL, j, movecurrentworkspacetomonitor, d
-
-bind = , escape, submap, reset
-submap = reset
-
-# Switch workspaces
-bind = $mainMod, 1, workspace, 1
-bind = $mainMod, 2, workspace, 2
-bind = $mainMod, 3, workspace, 3
-bind = $mainMod, 4, workspace, 4
-bind = $mainMod, 5, workspace, 5
-bind = $mainMod, 6, workspace, 6
-bind = $mainMod, 7, workspace, 7
-bind = $mainMod, 8, workspace, 8
-bind = $mainMod, 9, workspace, 9
-
-bind = $mainMod, w, submap, workspace_submap
-submap = workspace_submap
-
-# Switch workspaces (Qtile / XMonad style)
-bind = $mainMod, 1, focusworkspaceoncurrentmonitor, 1
-bind = $mainMod, 2, focusworkspaceoncurrentmonitor, 2
-bind = $mainMod, 3, focusworkspaceoncurrentmonitor, 3
-bind = $mainMod, 4, focusworkspaceoncurrentmonitor, 4
-bind = $mainMod, 5, focusworkspaceoncurrentmonitor, 5
-bind = $mainMod, 6, focusworkspaceoncurrentmonitor, 6
-bind = $mainMod, 7, focusworkspaceoncurrentmonitor, 7
-bind = $mainMod, 8, focusworkspaceoncurrentmonitor, 8
-bind = $mainMod, 9, focusworkspaceoncurrentmonitor, 9
-
-# Move active window to a workspace with ALT + [0-9]
-bind = ALT, 1, movetoworkspace, 1
-bind = ALT, 2, movetoworkspace, 2
-bind = ALT, 3, movetoworkspace, 3
-bind = ALT, 4, movetoworkspace, 4
-bind = ALT, 5, movetoworkspace, 5
-bind = ALT, 6, movetoworkspace, 6
-bind = ALT, 7, movetoworkspace, 7
-bind = ALT, 8, movetoworkspace, 8
-bind = ALT, 9, movetoworkspace, 9
-
-# Move active window to a workspace but don't follow it
-bind = ALT CTRL, 1, movetoworkspacesilent, 1
-bind = ALT CTRL, 2, movetoworkspacesilent, 2
-bind = ALT CTRL, 3, movetoworkspacesilent, 3
-bind = ALT CTRL, 4, movetoworkspacesilent, 4
-bind = ALT CTRL, 5, movetoworkspacesilent, 5
-bind = ALT CTRL, 6, movetoworkspacesilent, 6
-bind = ALT CTRL, 7, movetoworkspacesilent, 7
-bind = ALT CTRL, 8, movetoworkspacesilent, 8
-bind = ALT CTRL, 9, movetoworkspacesilent, 9
-
-bind = , escape, submap, reset
-submap = reset
-
-# Scroll through existing workspaces with mainMod + scroll
-bind = $mainMod, mouse_down, workspace, e+1
-bind = $mainMod, mouse_up, workspace, e-1
-
-# Move/resize windows with mainMod + LMB/RMB and dragging
-bindm = $mainMod, mouse:272, movewindow
-bindm = $mainMod, mouse:273, resizewindow
+# Move/resize using mouse
+bindm = $mainMod,   mouse:272,  movewindow
+bindm = $mainMod,   mouse:273,  resizewindow
 
 # vim: ft=hyprlang
