@@ -92,4 +92,8 @@ eval "$(keychain --absolute --dir "$XDG_RUNTIME_DIR"/keychain --nogui --eval --q
 eval "$(zoxide init zsh)"
 {{- end }}
 
+{{- if lookPath "direnv" }}
+eval "$(direnv hook zsh)"
+{{- end }}
+
 eval "$(starship init zsh)"
