@@ -2,7 +2,6 @@
 fish_style_pwd_dir_length = 1
 
 [c]
-detect_folders = ["src"]
 format = '\[[$symbol($name)]($style)\]'
 
 [cmake]
