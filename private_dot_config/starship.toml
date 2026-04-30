@@ -33,7 +33,7 @@ format = '\[[$symbol]($style)\]'
 format = '\[[$symbol$environment]($style)\]'
 
 [container]
-format = '\[[$symbol \[$name\]]($style)\]'
+format = '\[[$symbol $name]($style)\]'
 
 [cpp]
 format = '\[[$symbol($version(-$name))]($style)\]'

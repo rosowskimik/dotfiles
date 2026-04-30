@@ -1,8 +1,6 @@
 git:
   autoFetch: false
   autoStageResolvedConflicts: false
-  commit:
-    signOff: true
   commitPrefix:
     - pattern: "^(\\d+)-.*$"
       replace: '[#$1] '
