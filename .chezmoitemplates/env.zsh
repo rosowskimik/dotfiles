@@ -33,7 +33,7 @@ export GOPATH="$XDG_DATA_HOME/go"
 export GOHOME="$COMPILERS_BASE/go"
 {{- end }}
 
-{{- if lookPath "podman" }}
+{{- if and (lookPath "podman") (lookPath "docker-compose") }}
 # Podman stuff
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock
 {{- end }}
@@ -69,7 +69,6 @@ export HISTFILE="$XDG_STATE_HOME/zsh/history"
 export HISTSIZE=20000
 export SAVEHIST="$HISTSIZE"
 export LESSHISTFILE=-
-export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 
 # PATH helpers
 prepend_path() {

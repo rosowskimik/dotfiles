@@ -64,6 +64,7 @@ if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
 	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
 fi
 
+if [ -z "${DISTROBOX_ENTER_PATH}" ]; then
 {{ if eq .chezmoi.osRelease.id "arch" -}}
 {{ if stat "/usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh" -}}
 typeset -gA FAST_HIGHLIGHT
@@ -80,6 +81,11 @@ source /usr/share/zsh/site-functions/zsh-autosuggestions.zsh
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 {{- end }}
+else
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh || true
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh || true
+[ -f /distrobox.zsh ] && source /distrobox.zsh
+fi
 
 [[ -f "$ZDOTDIR/functions"  ]] && source "$ZDOTDIR/functions"
 [[ -f "$ZDOTDIR/aliases" ]] && source "$ZDOTDIR/aliases"
@@ -89,11 +95,11 @@ eval "$(keychain --absolute --dir "$XDG_RUNTIME_DIR"/keychain --nogui --eval --q
 {{- end }}
 
 {{- if lookPath "zoxide" }}
-eval "$(zoxide init zsh)"
+eval "$(zoxide init zsh 2>/dev/null)"
 {{- end }}
 
 {{- if lookPath "direnv" }}
-eval "$(direnv hook zsh)"
+eval "$(direnv hook zsh 2>/dev/null)"
 {{- end }}
 
-eval "$(starship init zsh)"
+eval "$(starship init zsh)" &>/dev/null
