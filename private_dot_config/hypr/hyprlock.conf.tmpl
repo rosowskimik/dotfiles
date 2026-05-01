@@ -44,5 +44,13 @@ label {
     valign = center
 }
 
+{{ if eq .chezmoi.hostname "ThinkPadArch" }}
+auth {
+    fingerprint {
+        enabled = true
+    }
+}
+{{ end -}}
+
 # vim: ft=hyprlang
 
