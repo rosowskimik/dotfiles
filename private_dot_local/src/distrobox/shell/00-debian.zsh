@@ -7,6 +7,6 @@ alias ls="eza --color=auto --group-directories-first -F"
 alias l="ls --smart-group -lgahM"
 alias lzg="lazygit"
 
-export TERM=kitty
+export TERM=xterm-256color
 
 sudo systemd-run --scope --no-block --quiet -- apt update -qqy
