@@ -1,4 +1,0 @@
-if [ -f /etc/bash_container ]; then
-  source /etc/bash_container
-  return
-fi
