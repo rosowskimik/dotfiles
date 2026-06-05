@@ -17,3 +17,9 @@ keybinding:
   commits:
     moveDownCommit: 'J'
     moveUpCommit: 'K'
+customCommands:
+  - key: 'ctrl+a'
+    context: 'commits'
+    command: "git commit --amend --no-edit --signoff"
+    description: "Sign-off commit"
+    loadingText: "Signing-off..."
