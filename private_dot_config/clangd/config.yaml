@@ -1,3 +1,6 @@
+Diagnostics:
+  Suppress:
+    - pp_hash_error
 CompileFlags:
   Remove:
     - -march=*
@@ -8,6 +11,7 @@ CompileFlags:
     - -fmin-function-alignment*
     - -fno-allow-store-data-races
     - -fno-ipa-sra
+    - -fno-pp-hash-error
     - -fno-printf-return-value
     - -fno-reorder-functions
     - -fstrict-volatile-bitfields
