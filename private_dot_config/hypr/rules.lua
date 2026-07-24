@@ -14,6 +14,7 @@ hl.window_rule({ float = true, match = { class = "^(kicad)$", title = "^(3D View
 hl.window_rule({ float = true, match = { class = "^(file-png)$" } })
 hl.window_rule({ float = true, match = { class = "^(Runsimics)$" } })
 hl.window_rule({ float = true, match = { class = "^(imv)$" } })
+hl.window_rule({ float = true, match = { class = "^(tuned-gui)$" } })
 hl.window_rule({ float = true, match = { class = "^(DivineDawn)$" } })
 hl.window_rule({ float = true, match = { title = "^(Zenless Zone Zero)$" } })
 hl.window_rule({ workspace = "9", match = { class = "^(steam_app_4162040)$" } })
