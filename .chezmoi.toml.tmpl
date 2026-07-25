@@ -58,9 +58,9 @@
 	{{- end }}
 
 	# Wallpaper
-	{{- if eq .chezmoi.hostname "ThinkBookArch" }}
-	wall = "/home/{{- .chezmoi.username -}}/Pictures/Wallpapers/wallhaven-rddgwm.jpg"
-	lock = "/home/{{- .chezmoi.username -}}/Pictures/Wallpapers/wallhaven-3lyrvy.png"
+	{{- if eq .chezmoi.hostname "ThinkPadArch" }}
+	wall = "/home/{{- .chezmoi.username -}}/Pictures/Wallpapers/16x9/1920x1080/wallhaven-rddgwm.jpg"
+	lock = "/home/{{- .chezmoi.username -}}/Pictures/Wallpapers/16x9/3840x2160/wallhaven-3lyrvy.png"
 	{{- else if eq .chezmoi.hostname "B650Arch" }}
 	wall = "/home/{{- .chezmoi.username -}}/Pictures/Wallpapers/16x9/2560x1440/zbotwmc2560.jpg"
 	lock = "/home/{{- .chezmoi.username -}}/Pictures/Wallpapers/16x9/2560x1440/wallhaven-yxdrex.png"
