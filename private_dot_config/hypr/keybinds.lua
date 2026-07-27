@@ -5,11 +5,11 @@
 local mainMod = "SUPER"
 
 -- Exec ------------------------------------------------------------------------
-hl.bind(mainMod .. " + return", hl.dsp.exec_cmd("kitty -1"))
-hl.bind(mainMod .. " + SHIFT + return", hl.dsp.exec_cmd("kitty -1 -d /home/mroso yazi"))
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("firefox"))
-hl.bind("CTRL + SHIFT + P", hl.dsp.exec_cmd("firefox --private-window"))
-hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("pkill fuzzel || fuzzel"))
+hl.bind(mainMod .. " + return", hl.dsp.exec_cmd("uwsm-app -- kitty -1"))
+hl.bind(mainMod .. " + SHIFT + return", hl.dsp.exec_cmd("uwsm-app -- kitty -1 -d /home/mroso yazi"))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("uwsm-app -- firefox.desktop"))
+hl.bind("CTRL + SHIFT + P", hl.dsp.exec_cmd("uwsm-app -- firefox.desktop:new-private-window"))
+hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("pkill fuzzel || fuzzel --launch-prefix='uwsm-app --'"))
 hl.bind(
 	mainMod .. " + V",
 	hl.dsp.exec_cmd(

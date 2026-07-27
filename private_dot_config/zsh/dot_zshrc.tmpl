@@ -94,6 +94,10 @@ if [ -d /distrobox-shell.d ]; then
 	done
 fi
 
+{{ if and (lookPath "nix") (stat "/usr/share/zsh/plugins/zsh-nix-shell/nix-shell.plugin.zsh") -}}
+source /usr/share/zsh/plugins/zsh-nix-shell/nix-shell.plugin.zsh
+{{- end }}
+
 {{ if and (lookPath "keychain") .isHeadless -}}
 eval "$(keychain --absolute --dir "$XDG_RUNTIME_DIR"/keychain --nogui --eval --quiet $(find ~/.ssh -name 'id_*' -and -not -name '*.pub'))"
 {{- end }}

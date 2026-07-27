@@ -168,7 +168,9 @@ format = '\[[$symbol \[$name\]]($style)\]'
 format = '\[[$symbol]($style)\]'
 
 [nix_shell]
-format = '\[[$symbol$state( \($name\))]($style)\]'
+symbol = '❄️'
+format = '\[[$symbol]($style)\]'
+heuristic = true
 
 [nodejs]
 format = '\[[$symbol]($style)\]'
