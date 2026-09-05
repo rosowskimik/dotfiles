@@ -85,10 +85,10 @@ hl.bind(mainMod .. " + CTRL + j", hl.dsp.window.swap({ direction = "down" }))
 hl.bind(mainMod .. " + CTRL + k", hl.dsp.window.swap({ direction = "up" }))
 hl.bind(mainMod .. " + CTRL + l", hl.dsp.window.swap({ direction = "right" }))
 
-hl.bind(mainMod .. " + SHIFT + h", hl.dsp.window.resize({ x = -10, y = 0 }), { repeating = true })
-hl.bind(mainMod .. " + SHIFT + j", hl.dsp.window.resize({ x = 0, y = 10 }), { repeating = true })
-hl.bind(mainMod .. " + SHIFT + k", hl.dsp.window.resize({ x = 0, y = -10 }), { repeating = true })
-hl.bind(mainMod .. " + SHIFT + l", hl.dsp.window.resize({ x = 10, y = 0 }), { repeating = true })
+hl.bind(mainMod .. " + SHIFT + h", hl.dsp.window.resize({ x = -10, y = 0, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + SHIFT + j", hl.dsp.window.resize({ x = 0, y = 10, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + SHIFT + k", hl.dsp.window.resize({ x = 0, y = -10, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + SHIFT + l", hl.dsp.window.resize({ x = 10, y = 0, relative = true }), { repeating = true })
 
 -- Workspaces: switch (SUPER+N) and move-silent (SUPER+SHIFT+N) -----------------
 for i = 1, 9 do

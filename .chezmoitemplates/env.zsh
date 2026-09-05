@@ -11,6 +11,8 @@ export APPTAINER_CACHEDIR="$XDG_CACHE_HOME/apptainer"
 export APPTAINER_CONFIGDIR="$XDG_CONFIG_HOME/apptainer"
 export APPTAINER_CONTAINERS="$XDG_SRC_HOME/apptainer"
 
+export CONTAINERS_STORAGE_CONF=${XDG_CONFIG_HOME}/containers/storage.conf
+
 # Bat stuff
 export BAT_STYLE="-numbers"
 

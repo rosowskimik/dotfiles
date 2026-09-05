@@ -40,5 +40,6 @@ hl.window_rule({ group = "barred", match = { class = "^(kitty)$" } })
 
 -- Borderless floating popups -------------------------------------------------
 hl.window_rule({ border_size = 0, match = { class = "^(org.gnome.FileRoller)$", title = "^$", float = true } })
+hl.window_rule({ border_size = 0, match = { class = "^(nemo)$", title = "^$", float = true } })
 -- hl.window_rule({ border_size = 0, match = { initialTitle = "^(Sign in to Steam)$", float = true } })
 -- hl.window_rule({ border_size = 0, match = { initialTitle = "^(SteamWebhelper)$", float = true } })

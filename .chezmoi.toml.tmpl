@@ -51,11 +51,7 @@
 	battery = {{ $battery | quote }}
 
 	# Cursor
-	{{- if eq .chezmoi.hostname "ThinkPadArch" }}
 	cursor = "phinger-cursors-dark"
-	{{- else }}
-	cursor = "bibata-modern-classic"
-	{{- end }}
 
 	# Wallpaper
 	{{- if eq .chezmoi.hostname "ThinkPadArch" }}
