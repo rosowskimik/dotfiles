@@ -20,6 +20,13 @@ keybinding:
 customCommands:
   - key: 'ctrl+a'
     context: 'commits'
-    command: "git commit --amend --no-edit --signoff"
-    description: "Sign-off commit"
+    description: "Sign-off commit(s)"
     loadingText: "Signing-off..."
+    command: |
+      branch=$(git symbolic-ref --quiet --short HEAD) &&
+      if git rev-parse --verify --quiet {{.SelectedCommitRange.From}}^ >/dev/null 2>&1; then
+        git rebase --signoff --autostash {{.SelectedCommitRange.From}}^ {{.SelectedCommitRange.To}}
+      else
+        git rebase --signoff --autostash --root {{.SelectedCommitRange.To}}
+      fi &&
+      git rebase --onto HEAD {{.SelectedCommitRange.To}} "$branch" --autostash
