@@ -1,0 +1,59 @@
+load_plugins {
+	vim-zellij-navigator
+	zjstatus
+}
+plugins {
+	vim-zellij-navigator location="file:{{ joinPath .chezmoi.homeDir ".local/share/zellij/plugins/vim-zellij-navigator.wasm" }}"
+	zjstatus location="file:{{ joinPath .chezmoi.homeDir ".local/share/zellij/plugins/zjstatus.wasm" }}"
+}
+attach_to_session true
+default_layout "dev"
+osc8_hyperlinks true
+pane_frames false
+show_startup_tips false
+stacked_resize false
+theme "catppuccin-macchiato"
+
+keybinds {
+  shared_except "locked" {
+    bind "Ctrl h" { MoveFocus "Left"; }
+    bind "Ctrl j" { MoveFocus "Down"; }
+    bind "Ctrl k" { MoveFocus "Up"; }
+    bind "Ctrl l" { MoveFocus "Right"; }
+
+    bind "Alt h" { Resize "Increase Left"; }
+    bind "Alt j" { Resize "Increase Down"; }
+    bind "Alt k" { Resize "Increase Up"; }
+    bind "Alt l" { Resize "Increase Right"; }
+
+    bind "Alt z" { ToggleFocusFullscreen; }
+
+    bind "Ctrl n" { NewTab; }
+
+    bind "Alt 1" { GoToTab 1; }
+    bind "Alt 2" { GoToTab 2; }
+    bind "Alt 3" { GoToTab 3; }
+    bind "Alt 4" { GoToTab 4; }
+    bind "Alt 5" { GoToTab 5; }
+    bind "Alt 6" { GoToTab 6; }
+    bind "Alt 7" { GoToTab 7; }
+    bind "Alt 8" { GoToTab 8; }
+    bind "Alt 9" { GoToTab 9; }
+
+    bind "Ctrl x" { CloseFocus; }
+  }
+
+  shared_except "move" "locked" {
+          bind "Ctrl ," { SwitchToMode "Move"; }
+  }
+  move {
+          bind "Ctrl ," { SwitchToMode "Normal"; }
+  }
+
+  shared_except "resize" "locked" {
+          bind "Ctrl ;" { SwitchToMode "Resize"; }
+  }
+  resize {
+          bind "Ctrl ;" { SwitchToMode "Normal"; }
+  }
+}
