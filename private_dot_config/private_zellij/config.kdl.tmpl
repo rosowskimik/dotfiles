@@ -68,4 +68,12 @@ keybinds {
   resize {
           bind "Ctrl ;" { SwitchToMode "Normal"; }
   }
+
+  shared_except "session" "locked" {
+          unbind "Ctrl o"
+          bind "Ctrl '" { SwitchToMode "Session"; }
+  }
+  resize {
+          bind "Ctrl '" { SwitchToMode "Normal"; }
+  }
 }
