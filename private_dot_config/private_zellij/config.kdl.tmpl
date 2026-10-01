@@ -28,6 +28,18 @@ keybinds {
 
     bind "Alt z" { ToggleFocusFullscreen; }
 
+    bind "Alt g" {
+      Run "lazygit" {
+        close_on_exit true
+        floating true
+        pinned true
+        x "10%"
+        y "10%"
+        width "80%"
+        height "80%"
+      }
+    }
+
     bind "Ctrl n" { NewTab; }
 
     bind "Alt 1" { GoToTab 1; }
